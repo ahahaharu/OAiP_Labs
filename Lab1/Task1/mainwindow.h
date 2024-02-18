@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <MovingRectangle.h>
+#include "Wagon.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    MovingRectangle *rect;
+    Wagon *wagon;
 protected:
     void paintEvent(QPaintEvent*) override;
 

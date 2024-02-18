@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     MovingRectangle.cpp \
+    Wagon.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     MovingRectangle.h \
+    Wagon.h \
     mainwindow.h
 
 FORMS += \

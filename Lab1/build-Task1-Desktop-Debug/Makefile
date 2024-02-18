@@ -53,13 +53,17 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Task1/MovingRectangle.cpp \
+		../Task1/Wagon.cpp \
 		../Task1/main.cpp \
 		../Task1/mainwindow.cpp moc_MovingRectangle.cpp \
+		moc_Wagon.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = MovingRectangle.o \
+		Wagon.o \
 		main.o \
 		mainwindow.o \
 		moc_MovingRectangle.o \
+		moc_Wagon.o \
 		moc_mainwindow.o
 DIST          = /home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/andrey/Qt/6.6.1/gcc_64/mkspecs/common/unix.conf \
@@ -218,7 +222,9 @@ DIST          = /home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/yacc.prf \
 		/home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/lex.prf \
 		../Task1/Task1.pro ../Task1/MovingRectangle.h \
+		../Task1/Wagon.h \
 		../Task1/mainwindow.h ../Task1/MovingRectangle.cpp \
+		../Task1/Wagon.cpp \
 		../Task1/main.cpp \
 		../Task1/mainwindow.cpp
 QMAKE_TARGET  = Task1
@@ -568,8 +574,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Task1/MovingRectangle.h ../Task1/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Task1/MovingRectangle.cpp ../Task1/main.cpp ../Task1/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Task1/MovingRectangle.h ../Task1/Wagon.h ../Task1/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Task1/MovingRectangle.cpp ../Task1/Wagon.cpp ../Task1/main.cpp ../Task1/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Task1/mainwindow.ui $(DISTDIR)/
 
 
@@ -602,9 +608,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /home/andrey/Qt/6.6.1/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_MovingRectangle.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_MovingRectangle.cpp moc_Wagon.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MovingRectangle.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_MovingRectangle.cpp moc_Wagon.cpp moc_mainwindow.cpp
 moc_MovingRectangle.cpp: ../Task1/MovingRectangle.h \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QWidget \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qwidget.h \
@@ -783,6 +789,186 @@ moc_MovingRectangle.cpp: ../Task1/MovingRectangle.h \
 		moc_predefs.h \
 		/home/andrey/Qt/6.6.1/gcc_64/libexec/moc
 	/home/andrey/Qt/6.6.1/gcc_64/libexec/moc $(DEFINES) --include /home/andrey/Programming/C++/QT/OAiP_Labs/Lab1/build-Task1-Desktop-Debug/moc_predefs.h -I/home/andrey/Qt/6.6.1/gcc_64/mkspecs/linux-g++ -I/home/andrey/Programming/C++/QT/OAiP_Labs/Lab1/Task1 -I/home/andrey/Qt/6.6.1/gcc_64/include -I/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets -I/home/andrey/Qt/6.6.1/gcc_64/include/QtGui -I/home/andrey/Qt/6.6.1/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Task1/MovingRectangle.h -o moc_MovingRectangle.cpp
+
+moc_Wagon.cpp: ../Task1/Wagon.h \
+		../Task1/MovingRectangle.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QWidget \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qwidget.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qconfig.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtcore-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qassert.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtnoop.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtypes.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtversion.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsysinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlogging.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qflags.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qforeach.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qttypetraits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmalloc.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qminmax.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnumeric.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qoverload.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qswap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtresource.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qttranslation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qversiontagging.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtgui-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtguiexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnamespace.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobject.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstring.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qchar.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearray.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qrefcount.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydata.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpair.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydataops.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20functional.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20memory.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringfwd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20type_traits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringliteral.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qanystringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiterator.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringlist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcoreevent.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmetatype.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompare.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdatastream.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfloat16.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmath.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiterable.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qscopeguard.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobject_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmargins.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q23utility.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qaction.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qkeysequence.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qicon.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsize.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpixmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qrect.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpoint.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qcolor.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qrgb.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qrgba64.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qshareddata.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qimage.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpixelformat.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtransform.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpolygon.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qregion.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qline.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvariant.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdebug.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtextstream.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qset.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qhash.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpalette.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qbrush.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfont.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfontinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qcursor.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qbitmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qevent.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiodevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qurl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qeventpoint.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qvector2d.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qvectornd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qinputdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qscreen.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QList \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QObject \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QRect \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QSize \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QSizeF \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QTransform \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QPaintEvent \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QPainter \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpainter.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtextoption.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpen.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QPropertyAnimation \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpropertyanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvariantanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qabstractanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qeasingcurve.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QGraphicsItem \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpainterpath.h \
+		moc_predefs.h \
+		/home/andrey/Qt/6.6.1/gcc_64/libexec/moc
+	/home/andrey/Qt/6.6.1/gcc_64/libexec/moc $(DEFINES) --include /home/andrey/Programming/C++/QT/OAiP_Labs/Lab1/build-Task1-Desktop-Debug/moc_predefs.h -I/home/andrey/Qt/6.6.1/gcc_64/mkspecs/linux-g++ -I/home/andrey/Programming/C++/QT/OAiP_Labs/Lab1/Task1 -I/home/andrey/Qt/6.6.1/gcc_64/include -I/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets -I/home/andrey/Qt/6.6.1/gcc_64/include/QtGui -I/home/andrey/Qt/6.6.1/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Task1/Wagon.h -o moc_Wagon.cpp
 
 moc_mainwindow.cpp: ../Task1/mainwindow.h \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QMainWindow \
@@ -1164,6 +1350,184 @@ MovingRectangle.o: ../Task1/MovingRectangle.cpp ../Task1/MovingRectangle.h \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpainterpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MovingRectangle.o ../Task1/MovingRectangle.cpp
+
+Wagon.o: ../Task1/Wagon.cpp ../Task1/Wagon.h \
+		../Task1/MovingRectangle.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QWidget \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qwidget.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qglobal.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qconfig.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtcore-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qassert.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtnoop.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtypes.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtversion.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsysinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlogging.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qflags.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qforeach.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qttypetraits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmalloc.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qminmax.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnumeric.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qoverload.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qswap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtresource.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qttranslation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qversiontagging.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtgui-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtguiexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnamespace.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobject.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstring.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qchar.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearray.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qrefcount.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydata.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpair.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qarraydataops.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20functional.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20memory.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringfwd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q20type_traits.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringliteral.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qanystringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qlist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiterator.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringlist.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qalgorithms.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcoreevent.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmetatype.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcompare.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdatastream.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qfloat16.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmath.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiterable.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qscopeguard.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qobject_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmargins.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/q23utility.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qaction.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qkeysequence.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qicon.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsize.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpixmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qrect.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpoint.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qcolor.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qrgb.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qrgba64.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qshareddata.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qimage.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpixelformat.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtransform.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpolygon.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qregion.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qline.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvariant.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qdebug.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qtextstream.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qset.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qhash.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpalette.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qbrush.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfont.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qfontinfo.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qcursor.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qbitmap.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qevent.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qiodevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpointer.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qurl.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qeventpoint.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qvector2d.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qvectornd.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qinputdevice.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qscreen.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QList \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QObject \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QRect \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QSize \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QSizeF \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QTransform \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QPaintEvent \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/QPainter \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpainter.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qtextoption.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpen.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/QPropertyAnimation \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qpropertyanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qvariantanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qabstractanimation.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtCore/qeasingcurve.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QGraphicsItem \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/home/andrey/Qt/6.6.1/gcc_64/include/QtGui/qpainterpath.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Wagon.o ../Task1/Wagon.cpp
 
 main.o: ../Task1/main.cpp ../Task1/mainwindow.h \
 		/home/andrey/Qt/6.6.1/gcc_64/include/QtWidgets/QMainWindow \
@@ -1583,6 +1947,9 @@ mainwindow.o: ../Task1/mainwindow.cpp ../Task1/mainwindow.h \
 
 moc_MovingRectangle.o: moc_MovingRectangle.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MovingRectangle.o moc_MovingRectangle.cpp
+
+moc_Wagon.o: moc_Wagon.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Wagon.o moc_Wagon.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
