@@ -16,6 +16,8 @@ public:
     void moveRight();
 protected:
     void paintEvent(QPaintEvent *) override;
+private:
+    QPropertyAnimation *animation;
 
 };
 

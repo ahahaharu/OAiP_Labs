@@ -1,4 +1,5 @@
 #include "MovingRectangle.h"
+// #include <QGraphicsItem>
 
 MovingRectangle::MovingRectangle(QWidget *parent) : QWidget(parent)
 {
@@ -16,10 +17,10 @@ void MovingRectangle::paintEvent(QPaintEvent *)
 
 void MovingRectangle::moveRight() {
     int a = x();
-    QPropertyAnimation *animation = new QPropertyAnimation(this, "pos");
+    animation = new QPropertyAnimation(this, "pos");
     animation -> setDuration(500);
     animation->setStartValue(pos());
-    a += 50;
+    a += 25;
     if (a < 350) {
         animation->setEndValue(QPoint(a, y()));
         animation->start(QAbstractAnimation::DeleteWhenStopped);
@@ -28,15 +29,16 @@ void MovingRectangle::moveRight() {
 
 void MovingRectangle::moveLeft() {
     int a = x();
-    QPropertyAnimation *animation = new QPropertyAnimation(this, "pos");
+    animation = new QPropertyAnimation(this, "pos");
     animation -> setDuration(500);
     animation->setStartValue(pos());
-    a -= 50;
+    a -= 25;
     if (a > 50) {
         animation->setEndValue(QPoint(a, y()));
         animation->start(QAbstractAnimation::DeleteWhenStopped);
     }
 }
+
 
 
 
