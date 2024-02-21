@@ -82,3 +82,4 @@ void MainWindow::on_pushButton_9_clicked()
     figure->downScale();
 }
 
+
