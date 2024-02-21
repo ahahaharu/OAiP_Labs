@@ -3,8 +3,7 @@
 
 void Figure::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->setRenderHint(QPainter::Antialiasing, true);
-    painter->drawRect(-250, -250, 500, 500);
+
 }
 
 Figure::Figure()
@@ -108,3 +107,26 @@ void Figure::downScale()
 
 }
 
+float Figure::getScale() {
+    return scale;
+}
+
+float Figure::findArea()
+{
+    return 0;
+}
+
+float Figure::findPerimeter()
+{
+    return 0;
+}
+
+void Figure::SBMoveX(int x)
+{
+    this->setPos(x, y());
+}
+
+void Figure::SBMoveY(int y)
+{
+    this->setPos(x(), y);
+}

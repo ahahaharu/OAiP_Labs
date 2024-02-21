@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "Figure.h"
+#include "Triangle.h"
+#include "triangledialog.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
@@ -20,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void updateValues();
 
 private slots:
     void on_pushButton_clicked();
@@ -40,11 +43,16 @@ private slots:
 
     void on_pushButton_9_clicked();
 
+    void on_spinBox_valueChanged(int arg1);
+
+    void on_spinBox_2_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     Figure *figure = nullptr;
     QTimer *timer;
     QGraphicsScene *scene;
+    TriangleDialog triangleD;
 protected:
     void paintEvent(QPaintEvent*);
 };

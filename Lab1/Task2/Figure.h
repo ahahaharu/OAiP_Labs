@@ -13,8 +13,8 @@ class Figure: public QGraphicsObject {
 public:
     Figure();
 
-    //virtual float findArea();
-    //virtual float findPerimeter();
+    virtual float findArea();
+    virtual float findPerimeter();
     QPoint getCenter();
 
     //void mousePressing(QMouseEvent *);
@@ -33,7 +33,10 @@ public:
     void upScale();
     void downScale();
 
-    //float getScale();
+    float getScale();
+
+    void SBMoveX(int x);
+    void SBMoveY(int y);
 
 private:
     float scale = 1.0;

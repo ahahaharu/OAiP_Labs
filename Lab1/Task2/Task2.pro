@@ -10,15 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     Figure.cpp \
+    Triangle.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    triangledialog.cpp
 
 HEADERS += \
     Figure.h \
-    mainwindow.h
+    Triangle.h \
+    mainwindow.h \
+    triangledialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    triangledialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
