@@ -12,7 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QFrame>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -27,7 +27,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QFrame *frame;
     QComboBox *comboBox;
     QLabel *label;
     QPushButton *pushButton;
@@ -40,12 +39,13 @@ public:
     QLabel *label_6;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_6;
-    QPushButton *pushButton_7;
+    QPushButton *pushButton_moveUp;
+    QPushButton *pushButton_moveDown;
+    QPushButton *pushButton_moveRight;
+    QPushButton *pushButton_moveLeft;
     QPushButton *pushButton_8;
     QPushButton *pushButton_9;
+    QGraphicsView *graphicsView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -56,12 +56,6 @@ public:
         MainWindow->resize(1920, 1080);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        frame = new QFrame(centralwidget);
-        frame->setObjectName("frame");
-        frame->setGeometry(QRect(30, 30, 1300, 1020));
-        frame->setStyleSheet(QString::fromUtf8("background-color: white;"));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
         comboBox = new QComboBox(centralwidget);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
@@ -120,22 +114,22 @@ public:
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(1660, 320, 100, 100));
         pushButton_3->setFont(font1);
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(1510, 320, 100, 100));
-        pushButton_4->setFont(font1);
-        pushButton_5 = new QPushButton(centralwidget);
-        pushButton_5->setObjectName("pushButton_5");
-        pushButton_5->setGeometry(QRect(1510, 450, 100, 100));
-        pushButton_5->setFont(font1);
-        pushButton_6 = new QPushButton(centralwidget);
-        pushButton_6->setObjectName("pushButton_6");
-        pushButton_6->setGeometry(QRect(1660, 450, 100, 100));
-        pushButton_6->setFont(font1);
-        pushButton_7 = new QPushButton(centralwidget);
-        pushButton_7->setObjectName("pushButton_7");
-        pushButton_7->setGeometry(QRect(1360, 450, 100, 100));
-        pushButton_7->setFont(font1);
+        pushButton_moveUp = new QPushButton(centralwidget);
+        pushButton_moveUp->setObjectName("pushButton_moveUp");
+        pushButton_moveUp->setGeometry(QRect(1510, 320, 100, 100));
+        pushButton_moveUp->setFont(font1);
+        pushButton_moveDown = new QPushButton(centralwidget);
+        pushButton_moveDown->setObjectName("pushButton_moveDown");
+        pushButton_moveDown->setGeometry(QRect(1510, 450, 100, 100));
+        pushButton_moveDown->setFont(font1);
+        pushButton_moveRight = new QPushButton(centralwidget);
+        pushButton_moveRight->setObjectName("pushButton_moveRight");
+        pushButton_moveRight->setGeometry(QRect(1660, 450, 100, 100));
+        pushButton_moveRight->setFont(font1);
+        pushButton_moveLeft = new QPushButton(centralwidget);
+        pushButton_moveLeft->setObjectName("pushButton_moveLeft");
+        pushButton_moveLeft->setGeometry(QRect(1360, 450, 100, 100));
+        pushButton_moveLeft->setFont(font1);
         pushButton_8 = new QPushButton(centralwidget);
         pushButton_8->setObjectName("pushButton_8");
         pushButton_8->setGeometry(QRect(1430, 590, 100, 100));
@@ -144,6 +138,9 @@ public:
         pushButton_9->setObjectName("pushButton_9");
         pushButton_9->setGeometry(QRect(1590, 590, 100, 100));
         pushButton_9->setFont(font1);
+        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView->setObjectName("graphicsView");
+        graphicsView->setGeometry(QRect(30, 30, 1300, 1020));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -180,10 +177,10 @@ public:
         label_6->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:700;\">Y</span></p></body></html>", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\342\237\262", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "\342\237\263", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "\342\206\221", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("MainWindow", "\342\206\223", nullptr));
-        pushButton_6->setText(QCoreApplication::translate("MainWindow", "\342\206\222", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("MainWindow", "\342\206\220", nullptr));
+        pushButton_moveUp->setText(QCoreApplication::translate("MainWindow", "\342\206\221", nullptr));
+        pushButton_moveDown->setText(QCoreApplication::translate("MainWindow", "\342\206\223", nullptr));
+        pushButton_moveRight->setText(QCoreApplication::translate("MainWindow", "\342\206\222", nullptr));
+        pushButton_moveLeft->setText(QCoreApplication::translate("MainWindow", "\342\206\220", nullptr));
         pushButton_8->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_9->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
     } // retranslateUi

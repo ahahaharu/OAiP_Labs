@@ -14,25 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>1300</width>
-      <height>1020</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: white;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
@@ -116,8 +97,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Нарисовать</string>
@@ -269,7 +249,7 @@
      <string>⟳</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="pushButton_moveUp">
     <property name="geometry">
      <rect>
       <x>1510</x>
@@ -287,7 +267,7 @@
      <string>↑</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="pushButton_moveDown">
     <property name="geometry">
      <rect>
       <x>1510</x>
@@ -305,7 +285,7 @@
      <string>↓</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="pushButton_moveRight">
     <property name="geometry">
      <rect>
       <x>1660</x>
@@ -323,7 +303,7 @@
      <string>→</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="pushButton_moveLeft">
     <property name="geometry">
      <rect>
       <x>1360</x>
@@ -375,6 +355,16 @@
     </property>
     <property name="text">
      <string>-</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>1300</width>
+      <height>1020</height>
+     </rect>
     </property>
    </widget>
   </widget>
