@@ -105,6 +105,35 @@ void MainWindow::on_pushButton_clicked()
         } else {
             figure = nullptr;
         }
+    } else if (ui->comboBox->currentIndex() == 6) {
+        scene->clear();
+        figure = new Star5Pntd();
+        Star5Pntd* star = dynamic_cast<Star5Pntd*>(figure);
+        connect(&starD, &StarDialog::sendStarSignals, star, &Star5Pntd::setRs);
+        connect(&starD, &StarDialog::sendRBtnsSignal, star, &Star5Pntd::setPoints);
+        starD.exec();
+        if (star->getPoints() == 6) {
+            int r1, r2;
+            r1 = star->getR1();
+            r2 = star->getR2();
+            figure = new Star6Pntd();
+            Star6Pntd* star = dynamic_cast<Star6Pntd*>(figure);
+            star->setRs(r1, r2);
+        } else if (star->getPoints() == 8) {
+            int r1, r2;
+            r1 = star->getR1();
+            r2 = star->getR2();
+            figure = new Star8Pntd();
+            Star8Pntd* star = dynamic_cast<Star8Pntd*>(figure);
+            star->setRs(r1, r2);
+        }
+        if (star->getR1() && star->getR2()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 6;
+        } else {
+            figure = nullptr;
+        }
     }
 }
 
@@ -222,6 +251,24 @@ void MainWindow::on_pushButton_4_clicked()
             Rectangle* rectangle = dynamic_cast<Rectangle*>(figure);
             connect(&rectangleD, &RectangleDialog::sendRectangleSignals, rectangle, &Rectangle::setAB);
             rectangleD.exec();
+        } else if (curF == 6) {
+            Star5Pntd* star = dynamic_cast<Star5Pntd*>(figure);
+            connect(&starD, &StarDialog::sendStarSignals, star, &Star5Pntd::setRs);
+            connect(&starD, &StarDialog::sendRBtnsSignal, star, &Star5Pntd::setPoints);
+            starD.exec();
+            if (star->getPoints() == 6) {
+                int r1, r2;
+                r1 = star->getR1();
+                r2 = star->getR2();
+                Star6Pntd* star = dynamic_cast<Star6Pntd*>(figure);
+                star->setRs(r1, r2);
+            } else if (star->getPoints() == 8) {
+                int r1, r2;
+                r1 = star->getR1();
+                r2 = star->getR2();
+                Star8Pntd* star = dynamic_cast<Star8Pntd*>(figure);
+                star->setRs(r1, r2);
+            }
         }
         scene->addItem(figure);
         updateValues();

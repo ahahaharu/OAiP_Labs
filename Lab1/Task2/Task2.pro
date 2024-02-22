@@ -14,6 +14,9 @@ SOURCES += \
     Rectangle.cpp \
     Rhombus.cpp \
     Square.cpp \
+    Star5Pntd.cpp \
+    Star6Pntd.cpp \
+    Star8Pntd.cpp \
     Triangle.cpp \
     circledialog.cpp \
     main.cpp \
@@ -21,6 +24,7 @@ SOURCES += \
     rectangledialog.cpp \
     rhombusdialog.cpp \
     squaredialog.cpp \
+    stardialog.cpp \
     triangledialog.cpp
 
 HEADERS += \
@@ -29,12 +33,16 @@ HEADERS += \
     Rectangle.h \
     Rhombus.h \
     Square.h \
+    Star5Pntd.h \
+    Star6Pntd.h \
+    Star8Pntd.h \
     Triangle.h \
     circledialog.h \
     mainwindow.h \
     rectangledialog.h \
     rhombusdialog.h \
     squaredialog.h \
+    stardialog.h \
     triangledialog.h
 
 FORMS += \
@@ -43,6 +51,7 @@ FORMS += \
     rectangledialog.ui \
     rhombusdialog.ui \
     squaredialog.ui \
+    stardialog.ui \
     triangledialog.ui
 
 # Default rules for deployment.

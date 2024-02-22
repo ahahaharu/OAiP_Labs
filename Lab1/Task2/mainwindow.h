@@ -12,12 +12,16 @@
 #include "Rhombus.h"
 #include "Square.h"
 #include "Rectangle.h"
+#include "Star5Pntd.h";
+#include "Star6Pntd.h"
+#include "Star8Pntd.h"
 
 #include "triangledialog.h"
 #include "circledialog.h"
 #include "rhombusdialog.h"
 #include "squaredialog.h"
 #include "rectangledialog.h"
+#include "stardialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -113,6 +117,7 @@ private:
     RhombusDialog rhombusD;
     SquareDialog squareD;
     RectangleDialog rectangleD;
+    StarDialog starD;
 
 protected:
     void paintEvent(QPaintEvent*);
