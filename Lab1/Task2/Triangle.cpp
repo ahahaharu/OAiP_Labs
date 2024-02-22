@@ -24,6 +24,10 @@ float Triangle::findPerimeter()
     return 3*a*this->getScale();
 }
 
-void Triangle::setA(int b) {
-    this->a = b;
+void Triangle::setA(int a) {
+    this->a = a;
+}
+
+int Triangle::getA() {
+    return this->a;
 }

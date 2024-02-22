@@ -8,11 +8,7 @@ MovingRectangle::MovingRectangle(QWidget *parent) : QWidget(parent)
 
 void MovingRectangle::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
 
-    QRect rect(0, 0, 400, 100);
-
-    painter.fillRect(rect, Qt::red);
 }
 
 void MovingRectangle::moveRight() {

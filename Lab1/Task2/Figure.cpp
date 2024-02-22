@@ -23,87 +23,45 @@ QPoint Figure::getCenter()
 }
 
 void Figure::moveRight() {
-    int a = x();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a += 50;
-    animation->setEndValue(QPoint(a, y()));
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setPos(this->x() + 2, this->y());
 }
 
 void Figure::moveLeft() {
-    int a = x();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a -= 50;
-    animation->setEndValue(QPoint(a, y()));
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setPos(this->x() - 2, this->y());
 }
 
 void Figure::moveUp()
 {
-    int a = y();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a -= 50;
-    animation->setEndValue(QPoint(x(), a));
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setPos(this->x(), this->y() - 2);
 }
 
 void Figure::moveDown()
 {
-    int a = y();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a += 50;
-    animation->setEndValue(QPoint(x(), a));
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setPos(this->x(), this->y() + 2);
 }
 
 void Figure::rotateRight()
 {
-    animation = new QPropertyAnimation(this, "rotation");
-    animation->setDuration(500);
-    animation->setStartValue(rotation());
-    animation->setEndValue(rotation()+10);
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setRotation(rotation()+1);
 }
 
 
 void Figure::rotateLeft()
 {
-    animation = new QPropertyAnimation(this, "rotation");
-    animation->setDuration(500);
-    animation->setStartValue(rotation());
-    animation->setEndValue(rotation()-10);
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
+    this->setRotation(rotation()-1);
 }
 
 void Figure::upScale()
 {
-    animation = new QPropertyAnimation(this, "scale");
-    animation->setDuration(500);
-    animation->setStartValue(scale);
-    animation->setEndValue(scale*1.1);
-    animation->start();
-
-    scale = scale*1.1;
+    scale = scale*1.01;
+    this->setScale(scale);
 
 }
 
 void Figure::downScale()
 {
-    animation = new QPropertyAnimation(this, "scale");
-    animation->setDuration(500);
-    animation->setStartValue(scale);
-    animation->setEndValue(scale/1.1);
-    animation->start();
-
-    scale = scale/1.1;
+    scale = scale/1.01;
+    this->setScale(scale);
 
 }
 
