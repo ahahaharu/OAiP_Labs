@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TriangleDialog</class>
- <widget class="QDialog" name="TriangleDialog">
+ <class>RectangleDialog</class>
+ <widget class="QDialog" name="RectangleDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>130</height>
+    <width>400</width>
+    <height>148</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Создание прямоугольника</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>80</y>
+     <x>30</x>
+     <y>100</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -32,10 +32,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>421</width>
-     <height>31</height>
+     <x>20</x>
+     <y>20</y>
+     <width>181</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -44,14 +44,42 @@
     </font>
    </property>
    <property name="text">
-    <string>Введите размер стороны треугольника:</string>
+    <string>Введите длину: </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Введите ширину: </string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>35</y>
+     <x>240</x>
+     <y>20</y>
+     <width>113</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>60</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -63,7 +91,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>TriangleDialog</receiver>
+   <receiver>RectangleDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -79,7 +107,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>TriangleDialog</receiver>
+   <receiver>RectangleDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

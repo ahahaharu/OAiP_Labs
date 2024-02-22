@@ -49,10 +49,62 @@ void MainWindow::on_pushButton_clicked()
         if (triangle->getA()) {
             scene->addItem(figure);
             updateValues();
+            curF = 1;
         } else {
             figure = nullptr;
         }
-
+    } else if (ui->comboBox->currentIndex() == 2) {
+        scene->clear();
+        figure = new Circle();
+        Circle* circle = dynamic_cast<Circle*>(figure);
+        connect(&circleD, &CircleDialog::sendCircleSignals, circle, &Circle::setR);
+        circleD.exec();
+        if (circle->getR()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 2;
+        } else {
+            figure = nullptr;
+        }
+    } else if (ui->comboBox->currentIndex() == 3) {
+        scene->clear();
+        figure = new Rhombus();
+        Rhombus* rhombus = dynamic_cast<Rhombus*>(figure);
+        connect(&rhombusD, &RhombusDialog::sendRhombusSignals, rhombus, &Rhombus::setAB);
+        rhombusD.exec();
+        if (rhombus->getA() && rhombus->getB()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 3;
+        } else {
+            figure = nullptr;
+        }
+    } else if (ui->comboBox->currentIndex() == 4) {
+        scene->clear();
+        figure = new Square();
+        Square* square = dynamic_cast<Square*>(figure);
+        connect(&squareD, &SquareDialog::sendSquareSignals, square, &Square::setA);
+        squareD.exec();
+        if (square->getA()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 4;
+        } else {
+            figure = nullptr;
+        }
+    } else if (ui->comboBox->currentIndex() == 5) {
+        scene->clear();
+        figure = new Rectangle();
+        Rectangle* rectangle = dynamic_cast<Rectangle*>(figure);
+        connect(&rectangleD, &RectangleDialog::sendRectangleSignals, rectangle, &Rectangle::setAB);
+        rectangleD.exec();
+        if (rectangle->getA() && rectangle->getB()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 5;
+        } else {
+            figure = nullptr;
+        }
     }
 }
 
@@ -148,9 +200,29 @@ void MainWindow::on_spinBox_2_valueChanged(int arg1)
 void MainWindow::on_pushButton_4_clicked()
 {
     if (figure) {
-        Triangle* triangle = dynamic_cast<Triangle*>(figure);
-        connect(&triangleD, &TriangleDialog::sendTriangleSignals, triangle, &Triangle::setA);
-        triangleD.exec();
+        if (curF == 1) {
+            Triangle* triangle = dynamic_cast<Triangle*>(figure);
+            connect(&triangleD, &TriangleDialog::sendTriangleSignals, triangle, &Triangle::setA);
+            triangleD.exec();
+
+        } else if (curF == 2) {
+            Circle* circle = dynamic_cast<Circle*>(figure);
+            connect(&circleD, &CircleDialog::sendCircleSignals, circle, &Circle::setR);
+            circleD.exec();
+
+        } else if (curF == 3) {
+            Rhombus* rhombus = dynamic_cast<Rhombus*>(figure);
+            connect(&rhombusD, &RhombusDialog::sendRhombusSignals, rhombus, &Rhombus::setAB);
+            rhombusD.exec();
+        } else if (curF == 4) {
+            Square* square = dynamic_cast<Square*>(figure);
+            connect(&squareD, &SquareDialog::sendSquareSignals, square, &Square::setA);
+            squareD.exec();
+        } else if (curF == 5) {
+            Rectangle* rectangle = dynamic_cast<Rectangle*>(figure);
+            connect(&rectangleD, &RectangleDialog::sendRectangleSignals, rectangle, &Rectangle::setAB);
+            rectangleD.exec();
+        }
         scene->addItem(figure);
         updateValues();
     }

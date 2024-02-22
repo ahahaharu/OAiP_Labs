@@ -2,12 +2,22 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "Figure.h"
-#include "Triangle.h"
-#include "triangledialog.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+
+#include "Figure.h"
+#include "Triangle.h"
+#include "Circle.h"
+#include "Rhombus.h"
+#include "Square.h"
+#include "Rectangle.h"
+
+#include "triangledialog.h"
+#include "circledialog.h"
+#include "rhombusdialog.h"
+#include "squaredialog.h"
+#include "rectangledialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +33,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateValues();
+    int curF = 0;
 
 private slots:
     void on_pushButton_clicked();
@@ -98,6 +109,11 @@ private:
     QTimer *timer;
     QGraphicsScene *scene;
     TriangleDialog triangleD;
+    CircleDialog circleD;
+    RhombusDialog rhombusD;
+    SquareDialog squareD;
+    RectangleDialog rectangleD;
+
 protected:
     void paintEvent(QPaintEvent*);
 };

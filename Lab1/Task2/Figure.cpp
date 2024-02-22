@@ -69,6 +69,7 @@ float Figure::getScale() {
     return scale;
 }
 
+
 float Figure::findArea()
 {
     return 0;

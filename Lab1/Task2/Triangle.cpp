@@ -21,7 +21,8 @@ float Triangle::findArea()
 
 float Triangle::findPerimeter()
 {
-    return 3*a*this->getScale();
+    float s = this->getScale();
+    return 3*a*s;
 }
 
 void Triangle::setA(int a) {

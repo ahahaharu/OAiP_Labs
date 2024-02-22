@@ -16,9 +16,6 @@ public:
     explicit TriangleDialog(QWidget *parent = nullptr);
     ~TriangleDialog();
 
-
-    int getA();
-
 private slots:
     void on_buttonBox_accepted();
 
