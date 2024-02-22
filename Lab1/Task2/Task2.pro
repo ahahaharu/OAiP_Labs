@@ -11,47 +11,57 @@ CONFIG += c++17
 SOURCES += \
     Circle.cpp \
     Figure.cpp \
+    Hexagon.cpp \
     Rectangle.cpp \
     Rhombus.cpp \
     Square.cpp \
     Star5Pntd.cpp \
     Star6Pntd.cpp \
     Star8Pntd.cpp \
+    Trapezoid.cpp \
     Triangle.cpp \
     circledialog.cpp \
+    hexagondialog.cpp \
     main.cpp \
     mainwindow.cpp \
     rectangledialog.cpp \
     rhombusdialog.cpp \
     squaredialog.cpp \
     stardialog.cpp \
+    trapezoiddialog.cpp \
     triangledialog.cpp
 
 HEADERS += \
     Circle.h \
     Figure.h \
+    Hexagon.h \
     Rectangle.h \
     Rhombus.h \
     Square.h \
     Star5Pntd.h \
     Star6Pntd.h \
     Star8Pntd.h \
+    Trapezoid.h \
     Triangle.h \
     circledialog.h \
+    hexagondialog.h \
     mainwindow.h \
     rectangledialog.h \
     rhombusdialog.h \
     squaredialog.h \
     stardialog.h \
+    trapezoiddialog.h \
     triangledialog.h
 
 FORMS += \
     circledialog.ui \
+    hexagondialog.ui \
     mainwindow.ui \
     rectangledialog.ui \
     rhombusdialog.ui \
     squaredialog.ui \
     stardialog.ui \
+    trapezoiddialog.ui \
     triangledialog.ui
 
 # Default rules for deployment.

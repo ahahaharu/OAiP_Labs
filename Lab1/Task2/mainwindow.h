@@ -15,6 +15,8 @@
 #include "Star5Pntd.h";
 #include "Star6Pntd.h"
 #include "Star8Pntd.h"
+#include "Hexagon.h"
+#include "Trapezoid.h"
 
 #include "triangledialog.h"
 #include "circledialog.h"
@@ -22,6 +24,9 @@
 #include "squaredialog.h"
 #include "rectangledialog.h"
 #include "stardialog.h"
+#include "hexagondialog.h"
+#include "trapezoiddialog.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -118,6 +123,8 @@ private:
     SquareDialog squareD;
     RectangleDialog rectangleD;
     StarDialog starD;
+    HexagonDialog hexagonD;
+    TrapezoidDialog trapezoidD;
 
 protected:
     void paintEvent(QPaintEvent*);

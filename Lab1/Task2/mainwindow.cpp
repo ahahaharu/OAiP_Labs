@@ -134,6 +134,32 @@ void MainWindow::on_pushButton_clicked()
         } else {
             figure = nullptr;
         }
+    } else if (ui->comboBox->currentIndex() == 7) {
+        scene->clear();
+        figure = new Hexagon();
+        Hexagon* hex = dynamic_cast<Hexagon*>(figure);
+        connect(&hexagonD, &HexagonDialog::sendHexagonSignals, hex, &Hexagon::setR);
+        hexagonD.exec();
+        if (hex->getR()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 7;
+        } else {
+            figure = nullptr;
+        }
+    } else if (ui->comboBox->currentIndex() == 8) {
+        scene->clear();
+        figure = new Trapezoid();
+        Trapezoid* trapezoid = dynamic_cast<Trapezoid*>(figure);
+        connect(&trapezoidD, &TrapezoidDialog::sendTrapezoidSignals, trapezoid, &Trapezoid::setABH);
+        trapezoidD.exec();
+        if (trapezoid->getA() && trapezoid->getB() && trapezoid->getH()) {
+            scene->addItem(figure);
+            updateValues();
+            curF = 8;
+        } else {
+            figure = nullptr;
+        }
     }
 }
 
@@ -269,6 +295,14 @@ void MainWindow::on_pushButton_4_clicked()
                 Star8Pntd* star = dynamic_cast<Star8Pntd*>(figure);
                 star->setRs(r1, r2);
             }
+        } else if (curF == 7) {
+            Hexagon* hex = dynamic_cast<Hexagon*>(figure);
+            connect(&hexagonD, &HexagonDialog::sendHexagonSignals, hex, &Hexagon::setR);
+            hexagonD.exec();
+        } else if (curF == 8) {
+            Trapezoid* trapezoid = dynamic_cast<Trapezoid*>(figure);
+            connect(&trapezoidD, &TrapezoidDialog::sendTrapezoidSignals, trapezoid, &Trapezoid::setABH);
+            trapezoidD.exec();
         }
         scene->addItem(figure);
         updateValues();

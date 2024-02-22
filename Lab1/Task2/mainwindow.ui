@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Task 2</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QComboBox" name="comboBox">
@@ -65,7 +65,7 @@
     </item>
     <item>
      <property name="text">
-      <string>Параллелограмм</string>
+      <string>Трапеция</string>
      </property>
     </item>
    </widget>
@@ -335,6 +335,13 @@
       <width>1300</width>
       <height>1020</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url('pig.png');
+background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;</string>
     </property>
    </widget>
    <widget class="QLabel" name="areaLabel">
