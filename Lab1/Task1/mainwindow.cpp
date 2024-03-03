@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     wagon = new Wagon(this);
     wagon -> move(50, 100);
 
+
+
     timerRight = new QTimer(this);
     timerLeft = new QTimer(this);
 
@@ -30,6 +32,8 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
+    painter.translate(0, 250);
+    painter.drawLine(QPoint(0, 0), QPoint(1920, 0));
 
 }
 

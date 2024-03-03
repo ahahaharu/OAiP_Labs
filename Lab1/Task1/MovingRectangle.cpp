@@ -1,5 +1,5 @@
 #include "MovingRectangle.h"
-// #include <QGraphicsItem>
+#include <QMessageBox>
 
 MovingRectangle::MovingRectangle(QWidget *parent) : QWidget(parent)
 {
@@ -13,26 +13,25 @@ void MovingRectangle::paintEvent(QPaintEvent *)
 
 void MovingRectangle::moveRight() {
     int a = x();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a += 25;
-    if (a < 350) {
-        animation->setEndValue(QPoint(a, y()));
-        animation->start(QAbstractAnimation::DeleteWhenStopped);
+    a += 5;
+    if (a < 801) {
+        move(a, y());
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Вагон вышел за пределы окна!\nВагон будет возвращён в изначальное положение");
+        move(50, y());
     }
 }
 
 void MovingRectangle::moveLeft() {
     int a = x();
-    animation = new QPropertyAnimation(this, "pos");
-    animation -> setDuration(500);
-    animation->setStartValue(pos());
-    a -= 25;
-    if (a > 50) {
-        animation->setEndValue(QPoint(a, y()));
-        animation->start(QAbstractAnimation::DeleteWhenStopped);
+    a -= 5;
+    if (a > -400) {
+        move(a, y());
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Вагон вышел за пределы окна!\nВагон будет возвращён в изначальное положение");
+        move(50, y());
     }
+
 }
 
 
