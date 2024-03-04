@@ -7,6 +7,7 @@
 #include <QPropertyAnimation>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QMessageBox>
 
 
 

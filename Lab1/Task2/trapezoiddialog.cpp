@@ -25,7 +25,7 @@ void TrapezoidDialog::on_buttonBox_accepted()
     int h = t3.toInt(&isOk3);
 
 
-    if (!(isOk1 && isOk2 && isOk3)) {
+    if (!(isOk1 && isOk2 && isOk3) || a > 1000 || b > 1000 || h > 850 || a < 1 || b < 1 || h < 1) {
         a = 0;
         b = 0;
         h = 0;

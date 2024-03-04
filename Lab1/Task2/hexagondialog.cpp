@@ -20,7 +20,7 @@ void HexagonDialog::on_buttonBox_accepted()
     int b = a.toInt(&isOk);
 
 
-    if (!isOk) {
+    if (!isOk || b > 500 || b < 1) {
         b = 0;
     }
     emit sendHexagonSignals(b);

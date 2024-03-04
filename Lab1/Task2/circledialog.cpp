@@ -20,7 +20,7 @@ void CircleDialog::on_buttonBox_accepted()
     int b = a.toInt(&isOk);
 
 
-    if (!isOk) {
+    if (!isOk || b > 850 || b < 1) {
         b = 0;
     }
     emit sendCircleSignals(b);

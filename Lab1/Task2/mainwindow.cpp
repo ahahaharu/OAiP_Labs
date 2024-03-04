@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "triangledialog.h"
-#include <QDebug>
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,7 +19,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateValues()
 {
-
     ui->spinBox->setValue(figure->getCenter().x());
     ui->spinBox_2->setValue(figure->getCenter().y());
     ui->areaLabel->setText(QString::number(figure->findArea(), 'f', 2));
@@ -39,7 +36,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 void MainWindow::on_pushButton_clicked()
 {
     if (ui->comboBox->currentIndex() == 0) {
-
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не выбрана!\nВыберите фигуру в списке выше");
     } else if (ui->comboBox->currentIndex() == 1){
         scene->clear();
         figure = new Triangle();
@@ -51,7 +48,9 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 1;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
+
         }
     } else if (ui->comboBox->currentIndex() == 2) {
         scene->clear();
@@ -65,6 +64,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 2;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     } else if (ui->comboBox->currentIndex() == 3) {
@@ -78,6 +78,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 3;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     } else if (ui->comboBox->currentIndex() == 4) {
@@ -91,6 +92,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 4;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     } else if (ui->comboBox->currentIndex() == 5) {
@@ -104,6 +106,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 5;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     } else if (ui->comboBox->currentIndex() == 6) {
@@ -133,6 +136,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 6;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     } else if (ui->comboBox->currentIndex() == 7) {
@@ -159,6 +163,7 @@ void MainWindow::on_pushButton_clicked()
             updateValues();
             curF = 8;
         } else {
+            QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
             figure = nullptr;
         }
     }
@@ -241,6 +246,11 @@ void MainWindow::on_spinBox_valueChanged(int arg1)
 {
     if (figure) {
         figure->SBMoveX(arg1);
+    } else {
+        if (arg1 != 0) {
+            ui->spinBox->setValue(0);
+            QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы изменять её центр масс");
+        }
     }
 }
 
@@ -249,6 +259,11 @@ void MainWindow::on_spinBox_2_valueChanged(int arg1)
 {
     if (figure) {
         figure->SBMoveY(arg1);
+    } else {
+        if (arg1 != 0) {
+            ui->spinBox_2->setValue(0);
+            QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы изменять её центр масс");
+        }
     }
 }
 
@@ -257,33 +272,70 @@ void MainWindow::on_pushButton_4_clicked()
 {
     if (figure) {
         if (curF == 1) {
+
             Triangle* triangle = dynamic_cast<Triangle*>(figure);
+            int temp = triangle->getA();
             connect(&triangleD, &TriangleDialog::sendTriangleSignals, triangle, &Triangle::setA);
+            if (triangle->getA() == 0) triangle->setA(temp);
             triangleD.exec();
+            if (triangle->getA() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                triangle->setA(temp);
+            }
 
         } else if (curF == 2) {
             Circle* circle = dynamic_cast<Circle*>(figure);
+            int temp = circle->getR();
             connect(&circleD, &CircleDialog::sendCircleSignals, circle, &Circle::setR);
+            if (circle->getR() == 0) circle->setR(temp);
             connect(&circleD, &CircleDialog::sendCheckSignal, circle, &Circle::isCh);
             circleD.exec();
+            if (circle->getR() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                circle->setR(temp);
+            }
 
         } else if (curF == 3) {
             Rhombus* rhombus = dynamic_cast<Rhombus*>(figure);
+            int temp1 = rhombus->getA(), temp2 = rhombus->getB();
             connect(&rhombusD, &RhombusDialog::sendRhombusSignals, rhombus, &Rhombus::setAB);
+            if (rhombus->getA() == 0 || rhombus->getB() == 0) rhombus->setAB(temp1, temp2);
             rhombusD.exec();
+            if (rhombus->getA() == 0 || rhombus->getB() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                rhombus->setAB(temp1, temp2);
+            }
         } else if (curF == 4) {
             Square* square = dynamic_cast<Square*>(figure);
+            int temp = square->getA();
             connect(&squareD, &SquareDialog::sendSquareSignals, square, &Square::setA);
+            if (square->getA() == 0) square->setA(temp);
             squareD.exec();
+            if (square->getA() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                square->setA(temp);
+            }
         } else if (curF == 5) {
             Rectangle* rectangle = dynamic_cast<Rectangle*>(figure);
+            int temp1 = rectangle->getA(), temp2 = rectangle->getB();
             connect(&rectangleD, &RectangleDialog::sendRectangleSignals, rectangle, &Rectangle::setAB);
+            if (rectangle->getA() == 0 || rectangle->getB() == 0) rectangle->setAB(temp1, temp2);
             rectangleD.exec();
+            if (rectangle->getA() == 0 || rectangle->getB() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                rectangle->setAB(temp1, temp2);
+            }
         } else if (curF == 6) {
             Star5Pntd* star = dynamic_cast<Star5Pntd*>(figure);
+            int temp1 = star->getR1(), temp2 = star->getR2();
             connect(&starD, &StarDialog::sendStarSignals, star, &Star5Pntd::setRs);
+            if (star->getR1() == 0 || star->getR2() == 0) star->setRs(temp1, temp2);
             connect(&starD, &StarDialog::sendRBtnsSignal, star, &Star5Pntd::setPoints);
             starD.exec();
+            if (star->getR1() == 0 || star->getR2() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                star->setRs(temp1, temp2);
+            }
             if (star->getPoints() == 6) {
                 int r1, r2;
                 r1 = star->getR1();
@@ -299,15 +351,29 @@ void MainWindow::on_pushButton_4_clicked()
             }
         } else if (curF == 7) {
             Hexagon* hex = dynamic_cast<Hexagon*>(figure);
+            int temp = hex->getR();
             connect(&hexagonD, &HexagonDialog::sendHexagonSignals, hex, &Hexagon::setR);
+            if (hex->getR() == 0) hex->setR(temp);
             hexagonD.exec();
+            if (hex->getR() == 0) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                hex->setR(temp);
+            }
         } else if (curF == 8) {
             Trapezoid* trapezoid = dynamic_cast<Trapezoid*>(figure);
+            int temp1 = trapezoid->getA(), temp2 = trapezoid->getB(), temp3 = trapezoid->getH();
             connect(&trapezoidD, &TrapezoidDialog::sendTrapezoidSignals, trapezoid, &Trapezoid::setABH);
+            if (trapezoid->getA() == 0 || trapezoid->getB() || trapezoid->getH()) trapezoid->setABH(temp1, temp2, temp3);
             trapezoidD.exec();
+            if (trapezoid->getA() == 0 || trapezoid->getB() || trapezoid->getH()) {
+                QMessageBox::critical(nullptr, "Ошибка", "Введено неверное значение");
+                trapezoid->setABH(temp1, temp2, temp3);
+            }
         }
         scene->addItem(figure);
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы изменять параметры");
     }
 }
 
@@ -321,6 +387,8 @@ void MainWindow::on_pushButton_5_clicked()
         ui->spinBox_2->setValue(0);
         ui->areaLabel->setText("0");
         ui->perimeterLabel->setText("0");
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы её удалить");
     }
 }
 
@@ -445,6 +513,8 @@ void MainWindow::moveUpSlot()
     if(figure) {
         figure->moveUp();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы двигать её");
     }
 }
 
@@ -453,13 +523,19 @@ void MainWindow::moveDownSlot()
     if(figure) {
         figure->moveDown();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы двигать её");
     }
 }
 
 void MainWindow::moveRightSlot()
 {
-    figure->moveRight();
-    updateValues();
+    if (figure) {
+        figure->moveRight();
+        updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы двигать её");
+    }
 }
 
 
@@ -468,13 +544,19 @@ void MainWindow::moveLeftSlot()
     if(figure) {
         figure->moveLeft();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы двигать её");
     }
 }
 
 void MainWindow::rotateRightSlot()
 {
-    figure->rotateRight();
-    updateValues();
+    if (figure) {
+        figure->rotateRight();
+        updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы вращать её");
+    }
 }
 
 void MainWindow::rotateLeftSlot()
@@ -482,6 +564,8 @@ void MainWindow::rotateLeftSlot()
     if(figure) {
         figure->rotateLeft();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы вращать её");
     }
 }
 
@@ -491,6 +575,8 @@ void MainWindow::upScaleSlot()
     if(figure) {
         figure->upScale();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы изменять её размер");
     }
 }
 
@@ -500,6 +586,18 @@ void MainWindow::downScaleSlot()
     if(figure) {
         figure->downScale();
         updateValues();
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы изменять её размер");
+    }
+}
+
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    if (figure) {
+        ui->graphicsView->centerOn(figure);
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы перевести на неё камеру");
     }
 }
 

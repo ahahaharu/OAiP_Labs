@@ -22,7 +22,7 @@ void RhombusDialog::on_buttonBox_accepted()
     int b = t2.toInt(&isOk2);
 
 
-    if (!(isOk1 && isOk2)) {
+    if (!(isOk1 && isOk2) || a > 1000 || b > 1000 || a < 1 || b < 1) {
         a = 0;
         b = 0;
     }

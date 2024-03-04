@@ -21,7 +21,7 @@ void TriangleDialog::on_buttonBox_accepted()
     int b = a.toInt(&isOk);
 
 
-    if (!isOk) {
+    if (!isOk || b > 750 || b < 1) {
         b = 0;
     }
     emit sendTriangleSignals(b);

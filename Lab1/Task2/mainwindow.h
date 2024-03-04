@@ -112,6 +112,8 @@ private slots:
 
     void on_pushButton_9_released();
 
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
     Figure *figure = nullptr;

@@ -20,7 +20,7 @@ void SquareDialog::on_buttonBox_accepted()
     int b = a.toInt(&isOk);
 
 
-    if (!isOk) {
+    if (!isOk || b > 1000 || b < 1) {
         b = 0;
     }
     emit sendSquareSignals(b);

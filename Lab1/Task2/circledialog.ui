@@ -75,6 +75,19 @@
     <string>Добавить ось</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>60</y>
+     <width>211</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Максимальное значение - 850</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
