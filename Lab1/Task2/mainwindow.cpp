@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "triangledialog.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateValues()
+void MainWindow::updateValues() // обновление значений
 {
     ui->spinBox->setValue(figure->getCenter().x());
     ui->spinBox_2->setValue(figure->getCenter().y());
@@ -27,13 +28,21 @@ void MainWindow::updateValues()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-    QPainter *p = new QPainter(this);
-    p->setRenderHint(QPainter::Antialiasing, true);
-    p->setPen(Qt::black);
-    p->end();
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(Qt::black);
+
+    if (figure && ui->checkBox->isChecked()) {
+        if (!point) {
+            point = new QGraphicsEllipseItem(QRectF(figure->getCenter().x() - 1, figure->getCenter().y()-1, 2, 2), figure);
+            point->setBrush(Qt::red);
+            point->setPen(QPen(Qt::red));
+            scene->addItem(point);
+        }
+    }
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked() // рисование фигуры
 {
     if (ui->comboBox->currentIndex() == 0) {
         QMessageBox::critical(nullptr, "Ошибка", "Фигура не выбрана!\nВыберите фигуру в списке выше");
@@ -268,7 +277,7 @@ void MainWindow::on_spinBox_2_valueChanged(int arg1)
 }
 
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_pushButton_4_clicked() // изменение параметров
 {
     if (figure) {
         if (curF == 1) {
@@ -378,15 +387,20 @@ void MainWindow::on_pushButton_4_clicked()
 }
 
 
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::on_pushButton_5_clicked() //
 {
     if (figure) {
         scene->clear();
         figure = nullptr;
+
         ui->spinBox->setValue(0);
         ui->spinBox_2->setValue(0);
+
         ui->areaLabel->setText("0");
         ui->perimeterLabel->setText("0");
+
+        ui->checkBox->setCheckState(Qt::Unchecked);
+        point = nullptr;
     } else {
         QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы её удалить");
     }
@@ -598,6 +612,24 @@ void MainWindow::on_pushButton_6_clicked()
         ui->graphicsView->centerOn(figure);
     } else {
         QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы перевести на неё камеру");
+    }
+}
+
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+    if (figure) {
+        update();
+    } else {
+        if (arg1 == Qt::Checked){
+            ui->checkBox->setCheckState(Qt::Unchecked);
+            QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы отобразить его центр масс");
+        }
+    }
+
+    if (arg1 == Qt::Unchecked && point) {
+        scene->removeItem(point);
+        point = nullptr;
     }
 }
 

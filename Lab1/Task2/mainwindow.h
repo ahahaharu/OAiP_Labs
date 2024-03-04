@@ -114,10 +114,13 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void on_checkBox_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     Figure *figure = nullptr;
     QTimer *timer;
+    QGraphicsEllipseItem *point = nullptr;
     QGraphicsScene *scene;
     TriangleDialog triangleD;
     CircleDialog circleD;
