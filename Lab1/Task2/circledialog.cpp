@@ -24,5 +24,11 @@ void CircleDialog::on_buttonBox_accepted()
         b = 0;
     }
     emit sendCircleSignals(b);
+
+    if (ui->checkBox->isChecked()) {
+        emit sendCheckSignal(true);
+    } else {
+        emit sendCheckSignal(false);
+    }
 }
 

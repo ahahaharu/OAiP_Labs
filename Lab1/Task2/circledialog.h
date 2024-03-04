@@ -19,6 +19,7 @@ private:
     Ui::CircleDialog *ui;
 signals:
     void sendCircleSignals(int value);
+    void sendCheckSignal(bool);
 private slots:
     void on_buttonBox_accepted();
 };

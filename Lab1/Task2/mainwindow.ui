@@ -337,11 +337,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url('pig.png');
-background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;</string>
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="QLabel" name="areaLabel">

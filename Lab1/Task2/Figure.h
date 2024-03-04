@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
 
 
 
@@ -16,11 +17,6 @@ public:
     virtual float findArea();
     virtual float findPerimeter();
     QPoint getCenter();
-
-    //void mousePressing(QMouseEvent *);
-    //void mouseMoving(QMouseEvent *);
-    //void mouseMovePressing(QMouseEvent *);
-    //void mouseMoveMoving(QMouseEvent *);
 
     void moveRight();
     void moveLeft();
@@ -37,6 +33,13 @@ public:
 
     void SBMoveX(int x);
     void SBMoveY(int y);
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
+    bool moving = false;
+    QPointF oldPos;
 
 private:
     float scale = 1.0;

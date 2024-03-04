@@ -9,6 +9,12 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget 
 {
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->drawEllipse(-r/2, -r/2, r, r);
+    QPen pen(Qt::DashLine);
+    if (is) {
+        painter->setPen(pen);
+        painter->drawLine(-r/2, 0, r/2, 0);
+        painter->drawLine(0, -r/2, 0, r/2);
+    }
 }
 
 float Circle::findArea()
@@ -29,4 +35,9 @@ void Circle::setR(int r) {
 
 int Circle::getR() {
     return this->r;
+}
+
+void Circle::isCh(bool c)
+{
+    this->is = c;
 }

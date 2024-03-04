@@ -58,6 +58,7 @@ void MainWindow::on_pushButton_clicked()
         figure = new Circle();
         Circle* circle = dynamic_cast<Circle*>(figure);
         connect(&circleD, &CircleDialog::sendCircleSignals, circle, &Circle::setR);
+        connect(&circleD, &CircleDialog::sendCheckSignal, circle, &Circle::isCh);
         circleD.exec();
         if (circle->getR()) {
             scene->addItem(figure);
@@ -263,6 +264,7 @@ void MainWindow::on_pushButton_4_clicked()
         } else if (curF == 2) {
             Circle* circle = dynamic_cast<Circle*>(figure);
             connect(&circleD, &CircleDialog::sendCircleSignals, circle, &Circle::setR);
+            connect(&circleD, &CircleDialog::sendCheckSignal, circle, &Circle::isCh);
             circleD.exec();
 
         } else if (curF == 3) {
