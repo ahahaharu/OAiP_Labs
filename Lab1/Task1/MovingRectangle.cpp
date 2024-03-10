@@ -13,23 +13,21 @@ void MovingRectangle::paintEvent(QPaintEvent *)
 
 void MovingRectangle::moveRight() {
     int a = x();
-    a += 5;
-    if (a < 801) {
+    a += 10;
+    if (a < 1850) {
         move(a, y());
     } else {
-        QMessageBox::critical(nullptr, "Ошибка", "Вагон вышел за пределы окна!\nВагон будет возвращён в изначальное положение");
-        move(50, y());
+        move(-399, y());
     }
 }
 
 void MovingRectangle::moveLeft() {
     int a = x();
-    a -= 5;
+    a -= 10;
     if (a > -400) {
         move(a, y());
     } else {
-        QMessageBox::critical(nullptr, "Ошибка", "Вагон вышел за пределы окна!\nВагон будет возвращён в изначальное положение");
-        move(50, y());
+        move(1849, y());
     }
 
 }

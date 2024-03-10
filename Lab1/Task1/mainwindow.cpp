@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     wagon = new Wagon(this);
-    wagon -> move(50, 100);
+    wagon -> move(725, 100);
 
-
+    sz = this->size();
 
     timerRight = new QTimer(this);
     timerLeft = new QTimer(this);
@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton, &QPushButton::released, this, &MainWindow::on_pushButton_released);
     connect(ui->pushButton_2, &QPushButton::pressed, this, &MainWindow::on_pushButton_2_pressed);
     connect(ui->pushButton_2, &QPushButton::released, this, &MainWindow::on_pushButton_2_released);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -39,14 +41,13 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::on_pushButton_clicked()
 {
-
-   wagon -> moveRight();
+    wagon->moveRight();
 }
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    wagon -> moveLeft();
+    wagon->moveLeft();
 
 }
 

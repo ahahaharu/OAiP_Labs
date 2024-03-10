@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QGraphicsItem>
+#include <QSize>
 
 class MovingRectangle : public QWidget {
 
