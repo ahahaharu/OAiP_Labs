@@ -13,13 +13,13 @@ Figure::Figure()
 
 QRectF Figure::boundingRect() const
 {
-    return QRectF(-500,-500,1000,1000);
+    return QRectF(-750,-750,1500,1500);
 }
 
 
 QPoint Figure::getCenter()
 {
-    return QPoint(this->x(), this->y());
+
 }
 
 void Figure::moveRight() {
@@ -58,6 +58,10 @@ void Figure::upScale()
 
 }
 
+void Figure::setRotationCenter(QPointF center) {
+    setTransformOriginPoint(center);
+}
+
 void Figure::downScale()
 {
     scale = scale/1.01;
@@ -90,26 +94,3 @@ void Figure::SBMoveY(int y)
     this->setPos(x(), y);
 }
 
-void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton) {
-        moving = true;
-        oldPos = event->pos();
-    }
-}
-
-void Figure::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (!(event->buttons() & Qt::LeftButton) || !moving)
-        return;
-
-    this->setPos(mapToParent(event->pos() - oldPos));
-    oldPos = event->pos();
-}
-
-void Figure::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton && moving) {
-        moving = false;
-    }
-}

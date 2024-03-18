@@ -17,7 +17,7 @@ public:
 
     virtual float findArea();
     virtual float findPerimeter();
-    QPoint getCenter();
+    virtual QPoint getCenter();
 
     void moveRight();
     void moveLeft();
@@ -35,12 +35,10 @@ public:
     void SBMoveX(int x);
     void SBMoveY(int y);
 
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void setRotationCenter(QPointF center);
 
-    bool moving = false;
-    QPointF oldPos;
+
+    bool isDrawing;
 
 private:
     float scale = 1.0;

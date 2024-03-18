@@ -40,6 +40,7 @@ void MainWindow::paintEvent(QPaintEvent *)
             scene->addItem(point);
         }
     }
+
 }
 
 void MainWindow::on_pushButton_clicked() // рисование фигуры
@@ -405,7 +406,7 @@ void MainWindow::on_pushButton_5_clicked() //
         ui->perimeterLabel->setText("");
 
         ui->checkBox->setCheckState(Qt::Unchecked);
-        point = nullptr;
+        points.clear();
     } else {
         QMessageBox::critical(nullptr, "Ошибка", "Фигура не нарисвована!\nНарисуйте фигуру, чтобы её удалить");
     }
@@ -635,6 +636,42 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     if (arg1 == Qt::Unchecked && point) {
         scene->removeItem(point);
         point = nullptr;
+    }
+}
+
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    ui->pushButton->setEnabled(false);
+    ui->pushButton_4->setEnabled(false);
+
+
+}
+
+
+void MainWindow::on_radioButton_clicked()
+{
+    ui->pushButton->setEnabled(true);
+    ui->pushButton_4->setEnabled(true);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (ui->radioButton_2->isChecked()) {
+        if (ui->comboBox->currentIndex() == 1) {
+            if (event->button() == Qt::LeftButton) {
+                points.push_back(ui->graphicsView->mapToScene(event->pos()));
+                if (points.size() == 3) {
+                    figure = new Triangle();
+                    Triangle* triangle = dynamic_cast<Triangle*>(figure);
+                    triangle->isDrawing = true;
+                    triangle->setPoints(points); // Установка точек треугольника
+                    scene->addItem(figure);
+                    updateValues();
+                    curF = 1;
+                }
+            }
+        }
     }
 }
 

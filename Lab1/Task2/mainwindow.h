@@ -116,6 +116,10 @@ private slots:
 
     void on_checkBox_stateChanged(int arg1);
 
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Figure *figure = nullptr;
@@ -130,8 +134,10 @@ private:
     StarDialog starD;
     HexagonDialog hexagonD;
     TrapezoidDialog trapezoidD;
+    QVector<QPointF> points;
 
 protected:
     void paintEvent(QPaintEvent*);
+    void mousePressEvent(QMouseEvent *event) override;
 };
 #endif // MAINWINDOW_H

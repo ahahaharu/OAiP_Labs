@@ -198,8 +198,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>1360</x>
-      <y>490</y>
+      <x>1400</x>
+      <y>530</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -216,8 +216,8 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>1660</x>
-      <y>490</y>
+      <x>1620</x>
+      <y>530</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -235,7 +235,7 @@
     <property name="geometry">
      <rect>
       <x>1510</x>
-      <y>490</y>
+      <y>530</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -253,7 +253,7 @@
     <property name="geometry">
      <rect>
       <x>1510</x>
-      <y>620</y>
+      <y>640</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -270,8 +270,8 @@
    <widget class="QPushButton" name="pushButton_moveRight">
     <property name="geometry">
      <rect>
-      <x>1660</x>
-      <y>620</y>
+      <x>1620</x>
+      <y>640</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -288,8 +288,8 @@
    <widget class="QPushButton" name="pushButton_moveLeft">
     <property name="geometry">
      <rect>
-      <x>1360</x>
-      <y>620</y>
+      <x>1400</x>
+      <y>640</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -306,8 +306,8 @@
    <widget class="QPushButton" name="pushButton_8">
     <property name="geometry">
      <rect>
-      <x>1430</x>
-      <y>760</y>
+      <x>1450</x>
+      <y>750</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -324,8 +324,8 @@
    <widget class="QPushButton" name="pushButton_9">
     <property name="geometry">
      <rect>
-      <x>1590</x>
-      <y>760</y>
+      <x>1570</x>
+      <y>750</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -497,7 +497,7 @@
     <property name="geometry">
      <rect>
       <x>1360</x>
-      <y>420</y>
+      <y>490</y>
       <width>251</width>
       <height>23</height>
      </rect>
@@ -512,6 +512,45 @@
     </property>
     <property name="tristate">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>1360</x>
+      <y>410</y>
+      <width>281</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Рисовать по параметрам</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>1360</x>
+      <y>440</y>
+      <width>331</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Рисовать карандашом на канве</string>
     </property>
    </widget>
   </widget>
