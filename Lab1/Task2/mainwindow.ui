@@ -367,7 +367,7 @@
      </font>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="perimeterLabel">
@@ -385,7 +385,7 @@
      </font>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox">

@@ -44,6 +44,11 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::on_pushButton_clicked() // рисование фигуры
 {
+
+    if (ui->checkBox->isChecked()) {
+        ui->checkBox->setCheckState(Qt::Unchecked);
+    }
+
     if (ui->comboBox->currentIndex() == 0) {
         QMessageBox::critical(nullptr, "Ошибка", "Фигура не выбрана!\nВыберите фигуру в списке выше");
     } else if (ui->comboBox->currentIndex() == 1){
@@ -396,8 +401,8 @@ void MainWindow::on_pushButton_5_clicked() //
         ui->spinBox->setValue(0);
         ui->spinBox_2->setValue(0);
 
-        ui->areaLabel->setText("0");
-        ui->perimeterLabel->setText("0");
+        ui->areaLabel->setText("");
+        ui->perimeterLabel->setText("");
 
         ui->checkBox->setCheckState(Qt::Unchecked);
         point = nullptr;
