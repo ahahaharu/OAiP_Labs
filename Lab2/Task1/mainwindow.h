@@ -40,6 +40,8 @@ private slots:
 
     void on_Duration_button_clicked();
 
+    void on_BDay_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Date* dates = new Date[100];

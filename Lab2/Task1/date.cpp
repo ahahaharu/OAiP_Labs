@@ -78,7 +78,13 @@ short Date::WeekNumber() {
 int Date::DaysTillYourBithday(Date birthdaydate) {
     Date curDate = getTodaysDate();
 
+    int b = 0;
+    if (!birthdaydate.IsLeap()) {
+        b++;
+    }
+
     if (curDate.month < birthdaydate.month) {
+        birthdaydate.year = curDate.year;
 
     } else if (curDate.month == birthdaydate.month) {
         if (curDate.day <= birthdaydate.day) {
@@ -94,8 +100,9 @@ int Date::DaysTillYourBithday(Date birthdaydate) {
     if (birthdaydate.day == 29 && birthdaydate.month == 2 && !curDate.IsLeap()) {
         birthdaydate.day = 28;
     }
+    b += birthdaydate.Duration(birthdaydate);
 
-    return birthdaydate.Duration(curDate);
+    return b;
 }
 
 int Date::Duration(Date date) {
@@ -149,6 +156,7 @@ int Date::DaysInThisYear() {
 int Date::DateToDays(){
     int days = 0;
     days += year*365 + (year / 4) - (year / 100) + (year / 400);
+    qDebug() << days;
     for (int i = 0; i < month - 1; i++) {
         days += NumOfDays[i];
     }

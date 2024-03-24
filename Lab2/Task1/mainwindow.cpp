@@ -189,7 +189,17 @@ void MainWindow::on_WeekNum_button_clicked()
 void MainWindow::on_Duration_button_clicked()
 {
     QMessageBox msgBox;
-    msgBox.setText("Количество дней между текущей и данной датой: "+QString::number(dates[curDateInd].Duration(dates[curDateInd])));
+    msgBox.setText("Количество дней между текущей и данной датой: "+QString::number(Date::Duration(dates[curDateInd])));
     msgBox.exec();
+}
+
+
+void MainWindow::on_BDay_button_clicked()
+{
+    QDate date = ui->BDay_Date->date();
+    Date BDdate = Date(date.day(), date.month(), date.year());
+    int a = Date::DaysTillYourBithday(BDdate);
+
+    ui->BDay_label->setText("Дней до дня рождения: "+QString::number(a));
 }
 

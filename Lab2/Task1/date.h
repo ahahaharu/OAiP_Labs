@@ -18,8 +18,8 @@ public:
     Date PreviousDate();
     bool IsLeap();
     short WeekNumber();
-    int DaysTillYourBithday(Date bithdaydate);
-    int Duration(Date date);
+    static int DaysTillYourBithday(Date bithdaydate);
+    static int Duration(Date date);
 
     bool isDateCorrect();
     int DaysInThisYear();
