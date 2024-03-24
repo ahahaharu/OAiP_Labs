@@ -23,11 +23,14 @@ public:
 
     bool isDateCorrect();
     int DaysInThisYear();
-    Date getTodaysDate();
+    static Date getTodaysDate();
     int DateToDays();
+
+    QString getDate();
 
 };
 
 Date StringToDate(QString);
+
 
 #endif // DATE_H

@@ -153,8 +153,29 @@ int Date::DateToDays(){
         days += NumOfDays[i];
     }
     days += day;
-
     return days;
 
+}
+
+QString Date::getDate() {
+    QString date = "";
+    if (day < 10) {
+        date += "0";
+    }
+    date += QString::number(day) + ".";
+    if (month < 10) {
+        date += "0";
+    }
+    date += QString::number(month) + ".";
+    if (year < 10) {
+        date += "000";
+    } else if (year < 100) {
+        date += "00";
+    } else if (year < 1000) {
+        date += "0";
+    }
+    date += QString::number(year);
+
+    return date;
 }
 

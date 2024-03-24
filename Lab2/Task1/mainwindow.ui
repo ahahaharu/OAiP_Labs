@@ -107,6 +107,16 @@
         <height>41</height>
        </rect>
       </property>
+      <property name="dateTime">
+       <datetime>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>2023</year>
+        <month>1</month>
+        <day>1</day>
+       </datetime>
+      </property>
       <property name="displayFormat">
        <string>dd.MM.yyyy</string>
       </property>
@@ -247,6 +257,11 @@
        <height>31</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </item>
     </widget>
     <widget class="QPushButton" name="changeDate_button">
      <property name="geometry">
