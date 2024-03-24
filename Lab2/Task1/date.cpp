@@ -36,7 +36,7 @@ Date Date::NextDate() {
 
     if (NextDay.day == NumOfDays[NextDay.month - 1]) {
         NextDay.day = 1;
-        if (NextDay.month > 12) {
+        if (NextDay.month == 12) {
             NextDay.month = 1;
             NextDay.year += 1;
         } else {

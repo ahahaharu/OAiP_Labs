@@ -156,27 +156,14 @@
      <widget class="QPushButton" name="openFileButton">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>10</y>
-        <width>291</width>
-        <height>51</height>
+        <x>10</x>
+        <y>20</y>
+        <width>320</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="text">
        <string>Открыть файл</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="saveFileButton">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>80</y>
-        <width>291</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Сохранить изменения в файл</string>
       </property>
      </widget>
     </widget>
@@ -203,7 +190,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Окрыть / Сохранить файл</string>
+      <string>Окрыть файл c датами</string>
      </property>
     </widget>
    </widget>
@@ -228,7 +215,7 @@
        <x>15</x>
        <y>80</y>
        <width>320</width>
-       <height>51</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
@@ -267,7 +254,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>190</y>
+       <y>200</y>
        <width>320</width>
        <height>51</height>
       </rect>
@@ -280,7 +267,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>250</y>
+       <y>260</y>
        <width>155</width>
        <height>51</height>
       </rect>
@@ -294,7 +281,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>140</y>
+       <y>150</y>
        <width>320</width>
        <height>41</height>
       </rect>
@@ -308,14 +295,30 @@
      <widget class="QLabel" name="selectedDate_label">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>100</x>
         <y>10</y>
         <width>291</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Дата: Дата не выбрана</string>
+       <string>Дата не выбрана</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="selectedDate_DateEdit">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>301</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="displayFormat">
+       <string>dd.MM.yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -323,7 +326,7 @@
      <property name="geometry">
       <rect>
        <x>180</x>
-       <y>250</y>
+       <y>260</y>
        <width>155</width>
        <height>51</height>
       </rect>
@@ -337,7 +340,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>310</y>
+       <y>320</y>
        <width>155</width>
        <height>51</height>
       </rect>
@@ -351,7 +354,7 @@
      <property name="geometry">
       <rect>
        <x>180</x>
-       <y>310</y>
+       <y>320</y>
        <width>155</width>
        <height>51</height>
       </rect>
@@ -365,7 +368,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>370</y>
+       <y>380</y>
        <width>320</width>
        <height>51</height>
       </rect>
@@ -373,6 +376,19 @@
      <property name="text">
       <string>Узнать количество дней между 
 текущей и данной датой</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>120</y>
+       <width>311</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Введите новую дату: </string>
      </property>
     </widget>
    </widget>

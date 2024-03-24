@@ -23,8 +23,26 @@ private slots:
 
     void on_openFileButton_clicked();
 
+    void on_SelectDate_button_clicked();
+
+    void on_changeDate_button_clicked();
+
+    void on_nextDay_button_clicked();
+
+    void on_prevDay_button_clicked();
+
+    void deactivateBtns();
+    void activateBtns();
+
+    void on_isLeap_button_clicked();
+
+    void on_WeekNum_button_clicked();
+
+    void on_Duration_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Date* dates = new Date[100];
+    int curDateInd = -1;
 };
 #endif // MAINWINDOW_H
