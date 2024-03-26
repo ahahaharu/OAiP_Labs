@@ -80,30 +80,86 @@ void MainWindow::on_openFileButton_clicked()
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::information(this, tr("Unable to open file"), file.errorString());
         return;
+    } else {
+        ui->tableWidget->setRowCount(0);
+        ui->Date_ComboBox->clear();
+        ui->Date_ComboBox->addItem("Выбрать");
     }
     int row = ui->tableWidget->rowCount();
 
     QTextStream in(&file);
     while (!in.atEnd()) {
         QString line = in.readLine();
-        ui->tableWidget->insertRow(row);
-        dates[row] = StringToDate(line);
-        QTableWidgetItem *col1Item = new QTableWidgetItem(dates[row].getDate());
-        ui->tableWidget->setItem(row,0,col1Item);
-        QTableWidgetItem *col2Item = new QTableWidgetItem(dates[row].NextDate().getDate());
-        ui->tableWidget->setItem(row,1,col2Item);
-        QTableWidgetItem *col3Item = new QTableWidgetItem("Следующий элемент не добавлен");
-        ui->tableWidget->setItem(row,2,col3Item);
+        if (isDateCorrect(line)) {
+            ui->tableWidget->insertRow(row);
+            dates[row] = StringToDate(line);
+            QTableWidgetItem *col1Item = new QTableWidgetItem(dates[row].getDate());
+            ui->tableWidget->setItem(row,0,col1Item);
+            QTableWidgetItem *col2Item = new QTableWidgetItem(dates[row].NextDate().getDate());
+            ui->tableWidget->setItem(row,1,col2Item);
+            QTableWidgetItem *col3Item = new QTableWidgetItem("Следующий элемент не добавлен");
+            ui->tableWidget->setItem(row,2,col3Item);
 
-        if (row) {
-            QTableWidgetItem *newDur = new QTableWidgetItem(QString::number(abs(dates[row].DateToDays() - dates[row-1].DateToDays())));
-            ui->tableWidget->setItem(row-1, 2, newDur);
+            if (row) {
+                QTableWidgetItem *newDur = new QTableWidgetItem(QString::number(abs(dates[row].DateToDays() - dates[row-1].DateToDays())));
+                ui->tableWidget->setItem(row-1, 2, newDur);
+            }
+
+            ui->Date_ComboBox->addItem(QString::number(row+1) + ") " + dates[row].getDate());
+
+            row++;
         }
-
-        ui->Date_ComboBox->addItem(QString::number(row+1) + ") " + dates[row].getDate());
-
-        row++;
     }
+}
+
+bool MainWindow::isDateCorrect(QString line) {
+    QString day = "", month = "", year = "";
+    int i = 0, c = 0;
+    while (line[i] != '.') {
+        if (line[i] < '0' || line[i] > '9') {
+            return false;
+        }
+        day += line[i];
+        i++;
+    }
+
+    if (line[i] == '.') {
+        if(day.length() == 0 || day.length() > 2) {
+            return false;
+        }
+        i++;
+    }
+
+    while (line[i] != '.') {
+        if (line[i] < '0' || line[i] > '9') {
+            return false;
+        }
+        month += line[i];
+        i++;
+    }
+
+    if (line[i] == '.') {
+        if (month.length() == 0 || month.length() > 2) {
+            return false;
+        }
+        i++;
+    }
+
+    for(i; i < line.length(); i++) {
+        c++;
+        if (line[i] < '0' || line[i] > '9') {
+            return false;
+        }
+        year += line[i];
+        i++;
+        if (c == 5) {
+            return false;
+        }
+    }
+
+    Date DateD = Date(day.toInt(), month.toInt(), year.toInt());
+
+    return DateD.isDateCorrect();
 }
 
 

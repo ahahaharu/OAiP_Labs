@@ -42,6 +42,8 @@ private slots:
 
     void on_BDay_button_clicked();
 
+    bool isDateCorrect(QString);
+
 private:
     Ui::MainWindow *ui;
     Date* dates = new Date[100];
