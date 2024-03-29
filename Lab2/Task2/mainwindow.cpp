@@ -232,3 +232,120 @@ void MainWindow::on_delete_button_clicked()
     }
 }
 
+
+void MainWindow::on_saveFile_button_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "../Task2/Files", tr("Все файлы (*)"));
+    int count = ui->tableWidget->rowCount();
+
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream out(&file);
+            for (int i = 0; i < count; i ++) {
+                out << students[i].getName() << ";"
+                    << students[i].getSpec() << ";"
+                    << students[i].getGroup() << ";"
+                    << QString::number(students[i].getMa()) << ";"
+                    << QString::number(students[i].getOaip()) << ";"
+                    << QString::number(students[i].getAgila()) << ";"
+                    << QString::number(students[i].getMl()) << ";"
+                    << QString::number(students[i].getHist()) << ";\n";
+            }
+            file.close();
+        }
+    }
+
+}
+
+
+void MainWindow::on_openFile_button_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть файл"), "../Task2/Files", tr("Все файлы (*)"));
+    delete[] students;
+    students = new Student[100];
+    int sz = ui->tableWidget->rowCount();
+    ui->tableWidget->setRowCount(0);
+    ui->studentSelect_comboBox->setCurrentIndex(0);
+    for (int i = 0; i < sz; i++) {
+        ui->studentSelect_comboBox->removeItem(1);
+    }
+    int c = 0;
+
+    if (!fileName.isEmpty()) {
+
+        QFile file(fileName);
+        if (file.open(QIODevice::ReadOnly)) {
+            QTextStream in(&file);
+            while (!in.atEnd()) {
+                QString name = "", spec = "", group = "", oaip_mark = "", ma_mark = "", agila_mark = "", ml_mark = "", hist_mark = "";
+                QString line = in.readLine();
+                int i = 0;
+
+                while (line[i] != ';') {
+                    name += line[i];
+                    i++;
+                }
+
+                i++;
+                while (line[i] != ';') {
+                    spec += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    group += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    oaip_mark += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    ma_mark += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    agila_mark += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    ml_mark += line[i];
+                    i++;
+                }
+
+                i++;
+                while(line[i] != ';') {
+                    hist_mark += line[i];
+                    i++;
+                }
+
+                students[c] = Student(name, spec, group, oaip_mark.toInt(), ma_mark.toInt(), agila_mark.toInt(), ml_mark.toInt(), hist_mark.toInt());
+
+                ui->tableWidget->insertRow(c);
+                QTableWidgetItem *col1Item = new QTableWidgetItem(name);
+                ui->tableWidget->setItem(c,0,col1Item);
+                QTableWidgetItem *col2Item = new QTableWidgetItem(spec);
+                ui->tableWidget->setItem(c,1,col2Item);
+                QTableWidgetItem *col3Item = new QTableWidgetItem(group);
+                ui->tableWidget->setItem(c,2,col3Item);
+                QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(students[c].averageMark(), 'f', 1));
+                ui->tableWidget->setItem(c,3,col4Item);
+
+                ui->studentSelect_comboBox->addItem(QString::number(c+1)+") "+students[c].getInitials());
+                c++;
+            }
+        }
+    }
+}
+

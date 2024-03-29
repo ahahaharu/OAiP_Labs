@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QFile>
+
 #include "student.h"
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +36,10 @@ private slots:
     void on_edit_button_clicked();
 
     void on_delete_button_clicked();
+
+    void on_saveFile_button_clicked();
+
+    void on_openFile_button_clicked();
 
 private:
     Ui::MainWindow *ui;
