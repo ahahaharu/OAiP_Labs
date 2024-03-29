@@ -24,6 +24,15 @@ public:
     double averageMark();
     QString getInitials();
 
+    QString getName();
+    QString getSpec();
+    QString getGroup();
+    int getOaip();
+    int getMa();
+    int getAgila();
+    int getMl();
+    int getHist();
+
 };
 
 #endif // STUDENT_H

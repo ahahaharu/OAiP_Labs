@@ -22,12 +22,22 @@ public:
 private slots:
     void addError(QString);
     void clearForm();
+    void clearEditForm();
+    void activateEditBtns();
+    void deactivateEditBtns();
 
     void on_AddButton_clicked();
+
+    void on_studentSelect_comboBox_currentIndexChanged(int index);
+
+    void on_edit_button_clicked();
+
+    void on_delete_button_clicked();
 
 private:
     Ui::MainWindow *ui;
     Student* students = new Student[100];
+    int curInd = 0;
 
 };
 #endif // MAINWINDOW_H

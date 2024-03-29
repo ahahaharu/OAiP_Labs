@@ -111,3 +111,35 @@ QString Student::getInitials() {
 
     return initials;
 }
+
+QString Student::getName() {
+    return this->name;
+}
+
+QString Student::getSpec() {
+    return this->speciality;
+}
+
+QString Student::getGroup() {
+    return this->group;
+}
+
+int Student::getOaip() {
+    return this->oaip_mark;
+}
+
+int Student::getMa(){
+    return this->ma_mark;
+}
+
+int Student::getAgila() {
+    return this->agila_mark;
+}
+
+int Student::getMl() {
+    return this->ml_mark;
+}
+
+int Student::getHist(){
+    return this->hist_mark;
+}
