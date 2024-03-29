@@ -1,4 +1,5 @@
 #include <student.h>
+#include <QDebug>
 
 Student::Student(QString name, QString speciality, QString group, int oaip_mark, int ma_mark, int agila_mark, int ml_mark, int hist_mark) {
     this->name = name;
@@ -11,8 +12,12 @@ Student::Student(QString name, QString speciality, QString group, int oaip_mark,
     this->hist_mark = hist_mark;
 }
 
+Student::Student(){
+
+}
+
 double Student::averageMark() {
-    return (oaip_mark + ma_mark + agila_mark + ml_mark + hist_mark) / 5;
+    return (oaip_mark + ma_mark + agila_mark + ml_mark + hist_mark) / 5.;
 }
 
 bool Student::isNameCorrect() {
@@ -53,15 +58,24 @@ bool Student::isNameCorrect() {
 }
 
 bool Student::isSpecCorrect() {
+    if (speciality.isEmpty()) {
+        return false;
+    }
+
     for (int i = 0; i < speciality.length(); i++) {
         if (!(name[i].isLetter() || name[i] == ' ')) {
             return false;
         }
     }
+
     return true;
 }
 
 bool Student::isGroupCorrect() {
+    if (speciality.isEmpty()) {
+        return false;
+    }
+
     if (group.length() != 6) {
         return false;
     }
@@ -73,4 +87,27 @@ bool Student::isGroupCorrect() {
     }
 
     return true;
+}
+
+QString Student::getInitials() {
+    QString initials = "";
+    int i = 0;
+
+    while (name[i] != ' ') {
+        initials+=name[i];
+        i++;
+    }
+
+    initials += ' ';
+    i++;
+
+    initials += name[i] + '.';
+    while (name[i] != ' ') {
+        i++;
+    }
+
+    i++;
+    initials += name[i] + '.';
+
+    return initials;
 }

@@ -23,6 +23,30 @@
       <height>421</height>
      </rect>
     </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>152</number>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>ФИО</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Специальность</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Номер группы</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Средняя оценка за 
+семестр</string>
+     </property>
+    </column>
    </widget>
    <widget class="QFrame" name="addFrame">
     <property name="geometry">
@@ -52,7 +76,7 @@
       <string>ФИО</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="FIOAdd_LineEdit">
+    <widget class="QLineEdit" name="fioAdd_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -75,7 +99,7 @@
       <string>Наименование специальности</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="SpecAdd_LineEdit">
+    <widget class="QLineEdit" name="specAdd_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -98,7 +122,7 @@
       <string>Номер группы</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="GroupAdd_LineEdit">
+    <widget class="QLineEdit" name="groupAdd_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -134,7 +158,7 @@
       <string>ОАиП</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="OAiPAdd">
+    <widget class="QSpinBox" name="oaipAdd_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -147,7 +171,7 @@
       <number>10</number>
      </property>
     </widget>
-    <widget class="QSpinBox" name="MAAdd">
+    <widget class="QSpinBox" name="maAdd_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -173,7 +197,7 @@
       <string>Мат анализ</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="AGiLAAdd">
+    <widget class="QSpinBox" name="agilaAdd_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -199,7 +223,7 @@
       <string>АГиЛА</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="MatLogicaAdd">
+    <widget class="QSpinBox" name="mlAdd_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -225,7 +249,7 @@
       <string>Мат логика</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="HistoryAdd">
+    <widget class="QSpinBox" name="hisoryAdd_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -319,7 +343,7 @@
       <string>ФИО</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="FIOAdd_LineEdit_5">
+    <widget class="QLineEdit" name="fioEdit_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -342,7 +366,7 @@
       <string>Наименование специальности</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="SpecAdd_LineEdit_5">
+    <widget class="QLineEdit" name="specEdit_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -365,7 +389,7 @@
       <string>Номер группы</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="GroupAdd_LineEdit_5">
+    <widget class="QLineEdit" name="groupEdit_line">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -401,7 +425,7 @@
       <string>ОАиП</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="OAiPAdd_5">
+    <widget class="QSpinBox" name="oaipEdit_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -414,7 +438,7 @@
       <number>10</number>
      </property>
     </widget>
-    <widget class="QSpinBox" name="MAAdd_5">
+    <widget class="QSpinBox" name="maEdit_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -440,7 +464,7 @@
       <string>Мат анализ</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="AGiLAAdd_5">
+    <widget class="QSpinBox" name="agilaEdit_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -466,7 +490,7 @@
       <string>АГиЛА</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="MatLogicaAdd_5">
+    <widget class="QSpinBox" name="mlEdit_spinBOx">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -492,7 +516,7 @@
       <string>Мат логика</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="HistoryAdd_5">
+    <widget class="QSpinBox" name="historyEdit_spinBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -518,7 +542,7 @@
       <string>История</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="AddButton_5">
+    <widget class="QPushButton" name="delete_button">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -531,7 +555,7 @@
       <string>Удалить</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="AddButton_6">
+    <widget class="QPushButton" name="edit_button">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -544,7 +568,7 @@
       <string>Изменить</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="studentSelect_comboBox">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -553,6 +577,11 @@
        <height>25</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Выбрать студента</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QLabel" name="label_84">
@@ -596,7 +625,7 @@
       <string>Выбрать группу</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_2">
+    <widget class="QComboBox" name="selectGroup_comboBox">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -606,7 +635,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="sort_button">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -635,7 +664,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_6">
+    <widget class="QPushButton" name="openFile_button">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -648,7 +677,7 @@
       <string>Открыть файл</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
+    <widget class="QPushButton" name="saveFile_button">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -658,7 +687,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Открыть файл</string>
+      <string>Сохранить файл</string>
      </property>
     </widget>
    </widget>
@@ -677,7 +706,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_8">
+    <widget class="QPushButton" name="find_button">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -741,7 +770,7 @@
        <string>Оценки:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_97">
+     <widget class="QLabel" name="oaipLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -754,7 +783,7 @@
        <string>ОАиП - 10</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_98">
+     <widget class="QLabel" name="maLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -767,7 +796,7 @@
        <string>Мат анализ - 10</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_99">
+     <widget class="QLabel" name="agilaLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -780,7 +809,7 @@
        <string>АГиЛА - 10</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_100">
+     <widget class="QLabel" name="mlLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -793,7 +822,7 @@
        <string>Мат логика - 10</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_101">
+     <widget class="QLabel" name="historyLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -859,6 +888,52 @@
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="_createVed_button">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>570</y>
+      <width>251</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Создать новую ведомость</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>670</y>
+      <width>231</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;При создании новой ведомости, &lt;/p&gt;&lt;p&gt;несохранённые даные будут &lt;/p&gt;&lt;p&gt;удалены&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="indent">
+     <number>-1</number>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

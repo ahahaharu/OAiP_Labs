@@ -17,10 +17,12 @@ private:
 
 public:
     Student(QString, QString, QString, int, int, int, int, int);
+    Student();
     bool isNameCorrect();
     bool isSpecCorrect();
     bool isGroupCorrect();
     double averageMark();
+    QString getInitials();
 
 };
 
