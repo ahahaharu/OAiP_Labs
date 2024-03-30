@@ -15,6 +15,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::isGroupExist(QString group) {
+    for (int i = 0; i < groupsCount; i++) {
+        if (group == groups[i]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void MainWindow::deactivateEditBtns() {
     ui->fioEdit_line->setEnabled(false);
     ui->specEdit_line->setEnabled(false);
@@ -128,6 +138,12 @@ void MainWindow::on_AddButton_clicked()
         addError(errorMessage);
     } else {
         ui->studentSelect_comboBox->addItem(QString::number(row+1)+") "+students[row].getInitials());
+        if (!isGroupExist(group)) {
+            groups[groupsCount] = group;
+            groupsCount++;
+            ui->selectGroup_comboBox->addItem(group);
+        }
+        studentsCount++;
     }
 
     clearForm();
@@ -143,14 +159,25 @@ void MainWindow::on_studentSelect_comboBox_currentIndexChanged(int i)
         deactivateEditBtns();
     } else {
         activateEditBtns();
-        ui->fioEdit_line->setText(students[i-1].getName());
-        ui->specEdit_line->setText(students[i-1].getSpec());
-        ui->groupEdit_line->setText(students[i-1].getGroup());
-        ui->oaipEdit_spinBox->setValue(students[i-1].getOaip());
-        ui->maEdit_spinBox->setValue(students[i-1].getMa());
-        ui->agilaEdit_spinBox->setValue(students[i-1].getAgila());
-        ui->mlEdit_spinBOx->setValue(students[i-1].getMl());
-        ui->historyEdit_spinBox->setValue(students[i-1].getHist());
+        if (ui->selectGroup_comboBox->currentIndex() != 0) {
+            ui->fioEdit_line->setText(filtered[i-1].getName());
+            ui->specEdit_line->setText(filtered[i-1].getSpec());
+            ui->groupEdit_line->setText(filtered[i-1].getGroup());
+            ui->oaipEdit_spinBox->setValue(filtered[i-1].getOaip());
+            ui->maEdit_spinBox->setValue(filtered[i-1].getMa());
+            ui->agilaEdit_spinBox->setValue(filtered[i-1].getAgila());
+            ui->mlEdit_spinBOx->setValue(filtered[i-1].getMl());
+            ui->historyEdit_spinBox->setValue(filtered[i-1].getHist());
+        } else {
+            ui->fioEdit_line->setText(students[i-1].getName());
+            ui->specEdit_line->setText(students[i-1].getSpec());
+            ui->groupEdit_line->setText(students[i-1].getGroup());
+            ui->oaipEdit_spinBox->setValue(students[i-1].getOaip());
+            ui->maEdit_spinBox->setValue(students[i-1].getMa());
+            ui->agilaEdit_spinBox->setValue(students[i-1].getAgila());
+            ui->mlEdit_spinBOx->setValue(students[i-1].getMl());
+            ui->historyEdit_spinBox->setValue(students[i-1].getHist());
+        }
     }
 }
 
@@ -160,6 +187,8 @@ void MainWindow::on_edit_button_clicked()
     QString errorMessage = "";
 
     bool isErr = false;
+    bool isDelete = false;
+
     QString name = ui->fioEdit_line->text();
     QString spec = ui->specEdit_line->text();
     QString group = ui->groupEdit_line->text();
@@ -169,7 +198,49 @@ void MainWindow::on_edit_button_clicked()
     int ml_mark = ui->mlEdit_spinBOx->value();
     int hist_mark = ui->historyEdit_spinBox->value();
 
-    students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+    if (!isGroupExist(group)) {
+        groups[groupsCount] = group;
+        groupsCount++;
+        ui->selectGroup_comboBox->addItem(group);
+    }
+
+    if (ui->selectGroup_comboBox->currentIndex() == 0) {
+        students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+    } else {
+        for (int i = 0; i < studentsCount; i++) {
+            if (students[i] == filtered[curInd]) {
+                students[i] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+                break;
+            }
+        }
+
+        if (group == ui->selectGroup_comboBox->currentText()) {
+            filtered[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+        } else {
+            isDelete = true;
+
+
+
+            for (int i = curInd; i < filteredCount - 1; i++) {
+                filtered[i] = filtered[i + 1];
+            }
+            filteredCount--;
+
+            ui->studentSelect_comboBox->removeItem(curInd+1);
+
+            for (int i = 1; i < filteredCount+1; i++) {
+                ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+filtered[i-1].getInitials());
+            }
+
+            if (filteredCount == 0) {
+                int ind = ui->selectGroup_comboBox->currentIndex();
+                ui->selectGroup_comboBox->setCurrentIndex(0);
+                ui->selectGroup_comboBox->removeItem(ind);
+                return;
+            }
+        }
+
+    }
 
     if (students[curInd].isNameCorrect()) {
         QTableWidgetItem *col1Item = new QTableWidgetItem(name);
@@ -199,8 +270,17 @@ void MainWindow::on_edit_button_clicked()
         isErr = true;
     }
     if (!isErr) {
-        QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(students[curInd].averageMark(), 'f', 1));
+        QTableWidgetItem *col4Item;
+        if (ui->selectGroup_comboBox->currentIndex() == 0) {
+            col4Item = new QTableWidgetItem(QString::number(students[curInd].averageMark(), 'f', 1));
+        } else {
+            col4Item = new QTableWidgetItem(QString::number(filtered[curInd].averageMark(), 'f', 1));
+        }
         ui->tableWidget->setItem(curInd,3,col4Item);
+    }
+
+    if (isDelete) {
+        ui->tableWidget->removeRow(curInd);
     }
 
     if (isErr) {
@@ -208,7 +288,6 @@ void MainWindow::on_edit_button_clicked()
         addError(errorMessage);
     } else {
         ui->studentSelect_comboBox->setItemText(curInd+1, QString::number(curInd+1)+") "+students[curInd].getInitials());
-
     }
 
     ui->studentSelect_comboBox->setCurrentIndex(0);
@@ -218,17 +297,97 @@ void MainWindow::on_edit_button_clicked()
 void MainWindow::on_delete_button_clicked()
 {
     int rowCount = ui->tableWidget->rowCount();
-    ui->tableWidget->removeRow(curInd);
 
-    for (int i = curInd; i < rowCount; i++) {
-        students[i] = students[i+1];
+    QString currentGroup = students[curInd].getGroup();
+
+    if (ui->selectGroup_comboBox->currentIndex() == 0) {
+        ui->tableWidget->removeRow(curInd);
+
+        for (int i = curInd; i < rowCount; i++) {
+            students[i] = students[i+1];
+        }
+
+        ui->studentSelect_comboBox->removeItem(curInd+1);
+        ui->studentSelect_comboBox->setCurrentIndex(0);
+
+        for (int i = 1; i < rowCount; i++) {
+            ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+students[i-1].getInitials());
+        }
+
+        studentsCount--;
+    } else {
+        ui->tableWidget->removeRow(curInd);
+
+        qDebug() << curInd;
+
+
+        for (int i = 0; i < studentsCount; i++) {
+            if (students[i] == filtered[curInd]) {
+                for (int j = i; j < studentsCount; j++) {
+                    students[j] = students[j+1];
+                }
+                break;
+            }
+        }
+
+        studentsCount--;
+
+        for (int i = curInd; i < filteredCount; i++) {
+            filtered[i] = filtered[i+1];
+        }
+
+        ui->studentSelect_comboBox->removeItem(curInd+1);
+        ui->studentSelect_comboBox->setCurrentIndex(0);
+
+        for (int i = 1; i < filteredCount; i++) {
+            ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+filtered[i-1].getInitials());
+        }
+
+        filteredCount--;
+
+
+
+        if (filteredCount == 0) {
+            for(int i = 0; i < groupsCount; i++) {
+                if (groups[i] == currentGroup) {
+                    for (int j = i; j < groupsCount - 1; j++) {
+                        groups[j] = groups[j + 1];
+                    }
+                    groupsCount--;
+
+                    int ind = ui->selectGroup_comboBox->currentIndex();
+                    ui->selectGroup_comboBox->setCurrentIndex(0);
+                    ui->selectGroup_comboBox->removeItem(ind);
+                    break;
+                }
+            }
+        }
     }
 
-    ui->studentSelect_comboBox->removeItem(curInd+1);
-    ui->studentSelect_comboBox->setCurrentIndex(0);
 
-    for (int i = 1; i < rowCount; i++) {
-        ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+students[i-1].getInitials());
+
+    bool isStillExist = false;
+    for (int i = 0; i < studentsCount - 1; i++) {
+        if (students[i].getGroup() == currentGroup) {
+            isStillExist = true;
+        }
+    }
+
+    if (!isStillExist) {
+        for(int i = 0; i < groupsCount; i++) {
+            if (groups[i] == currentGroup) {
+                for (int j = i; j < groupsCount - 1; j++) {
+                    groups[j] = groups[j + 1];
+                }
+
+                ui->selectGroup_comboBox->setCurrentIndex(0);
+                ui->selectGroup_comboBox->removeItem(i+1);
+                groupsCount--;
+
+
+                break;
+            }
+        }
     }
 }
 
@@ -263,20 +422,31 @@ void MainWindow::on_saveFile_button_clicked()
 void MainWindow::on_openFile_button_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть файл"), "../Task2/Files", tr("Все файлы (*)"));
-    delete[] students;
-    students = new Student[100];
-    int sz = ui->tableWidget->rowCount();
-    ui->tableWidget->setRowCount(0);
-    ui->studentSelect_comboBox->setCurrentIndex(0);
-    for (int i = 0; i < sz; i++) {
-        ui->studentSelect_comboBox->removeItem(1);
-    }
-    int c = 0;
+
 
     if (!fileName.isEmpty()) {
-
         QFile file(fileName);
         if (file.open(QIODevice::ReadOnly)) {
+            ui->studentSelect_comboBox->setCurrentIndex(0);
+            ui->selectGroup_comboBox->setCurrentIndex(0);
+            delete[] students;
+            students = new Student[100];
+            delete[] groups;
+            groups = new QString[50];
+
+            int sz = ui->tableWidget->rowCount();
+            ui->tableWidget->setRowCount(0);
+
+            for (int i = 0; i < sz; i++) {
+                ui->studentSelect_comboBox->removeItem(1);
+            }
+
+            for (int i = 0; i < groupsCount; i++) {
+                ui->selectGroup_comboBox->removeItem(1);
+            }
+            groupsCount = 0;
+            int c = 0;
+
             QTextStream in(&file);
             while (!in.atEnd()) {
                 QString name = "", spec = "", group = "", oaip_mark = "", ma_mark = "", agila_mark = "", ml_mark = "", hist_mark = "";
@@ -344,7 +514,117 @@ void MainWindow::on_openFile_button_clicked()
 
                 ui->studentSelect_comboBox->addItem(QString::number(c+1)+") "+students[c].getInitials());
                 c++;
+
+                if (!isGroupExist(group)) {
+                    groups[groupsCount] = group;
+                    groupsCount++;
+                    ui->selectGroup_comboBox->addItem(group);
+                }
+
+                studentsCount++;
             }
+        }
+    }
+}
+
+
+void MainWindow::on_selectGroup_comboBox_currentIndexChanged(int index)
+{
+    ui->tableWidget->setRowCount(0);
+    ui->studentSelect_comboBox->setCurrentIndex(0);
+    for (int i = 0; i < studentsCount; i++) {
+        ui->studentSelect_comboBox->removeItem(1);
+    }
+
+    if (index == 0) {
+        for (int i = 0; i < studentsCount; i++) {
+            ui->tableWidget->insertRow(i);
+            QTableWidgetItem *col1Item = new QTableWidgetItem(students[i].getName());
+            ui->tableWidget->setItem(i,0,col1Item);
+            QTableWidgetItem *col2Item = new QTableWidgetItem(students[i].getSpec());
+            ui->tableWidget->setItem(i,1,col2Item);
+            QTableWidgetItem *col3Item = new QTableWidgetItem(students[i].getGroup());
+            ui->tableWidget->setItem(i,2,col3Item);
+            QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(students[i].averageMark(), 'f', 1));
+            ui->tableWidget->setItem(i,3,col4Item);
+
+            ui->studentSelect_comboBox->addItem(QString::number(i+1)+") "+students[i].getInitials());
+        }
+    } else {
+        filteredCount = 0;
+        for (int i = 0; i < studentsCount; i++) {
+            if (students[i].getGroup() == ui->selectGroup_comboBox->currentText()) {
+                filtered[filteredCount] = students[i];
+                ui->tableWidget->insertRow(filteredCount);
+                QTableWidgetItem *col1Item = new QTableWidgetItem(students[i].getName());
+                ui->tableWidget->setItem(filteredCount,0,col1Item);
+                QTableWidgetItem *col2Item = new QTableWidgetItem(students[i].getSpec());
+                ui->tableWidget->setItem(filteredCount,1,col2Item);
+                QTableWidgetItem *col3Item = new QTableWidgetItem(students[i].getGroup());
+                ui->tableWidget->setItem(filteredCount,2,col3Item);
+                QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(students[i].averageMark(), 'f', 1));
+                ui->tableWidget->setItem(filteredCount,3,col4Item);
+
+                ui->studentSelect_comboBox->addItem(QString::number(filteredCount+1)+") "+students[i].getInitials());
+                filteredCount++;
+            }
+        }
+    }
+}
+
+
+void MainWindow::on_sort_button_clicked()
+{
+    Student temp;
+    ui->tableWidget->setRowCount(0);
+    ui->studentSelect_comboBox->setCurrentIndex(0);
+    for (int i = 0; i < studentsCount; i++) {
+        ui->studentSelect_comboBox->removeItem(1);
+    }
+
+    if (ui->selectGroup_comboBox->currentIndex() == 0) {
+        for (int i = 1; i < studentsCount; i++) {
+            for (int j = i; j > 0 && students[j - 1].averageMark() < students[j].averageMark(); j--) {
+                temp = students[j - 1];
+                students[j - 1] = students[j];
+                students[j] = temp;
+            }
+        }
+
+        for (int i = 0; i < studentsCount; i++) {
+            ui->tableWidget->insertRow(i);
+            QTableWidgetItem *col1Item = new QTableWidgetItem(students[i].getName());
+            ui->tableWidget->setItem(i,0,col1Item);
+            QTableWidgetItem *col2Item = new QTableWidgetItem(students[i].getSpec());
+            ui->tableWidget->setItem(i,1,col2Item);
+            QTableWidgetItem *col3Item = new QTableWidgetItem(students[i].getGroup());
+            ui->tableWidget->setItem(i,2,col3Item);
+            QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(students[i].averageMark(), 'f', 1));
+            ui->tableWidget->setItem(i,3,col4Item);
+
+            ui->studentSelect_comboBox->addItem(QString::number(i+1)+") "+students[i].getInitials());
+        }
+    } else {
+        for (int i = 0; i < filteredCount; i++) {
+            for (int j = i; j > 0 && filtered[j - 1].averageMark() < filtered[j].averageMark(); j--) {
+                temp = filtered[j - 1];
+                filtered[j - 1] = filtered[j];
+                filtered[j] = temp;
+            }
+        }
+
+        for (int i = 0; i < filteredCount; i++) {
+            ui->tableWidget->insertRow(i);
+            QTableWidgetItem *col1Item = new QTableWidgetItem(filtered[i].getName());
+            ui->tableWidget->setItem(i,0,col1Item);
+            QTableWidgetItem *col2Item = new QTableWidgetItem(filtered[i].getSpec());
+            ui->tableWidget->setItem(i,1,col2Item);
+            QTableWidgetItem *col3Item = new QTableWidgetItem(filtered[i].getGroup());
+            ui->tableWidget->setItem(i,2,col3Item);
+            QTableWidgetItem *col4Item = new QTableWidgetItem(QString::number(filtered[i].averageMark(), 'f', 1));
+            ui->tableWidget->setItem(i,3,col4Item);
+
+            ui->studentSelect_comboBox->addItem(QString::number(i+1)+") "+filtered[i].getInitials());
         }
     }
 }

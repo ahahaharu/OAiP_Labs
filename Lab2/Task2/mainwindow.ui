@@ -634,6 +634,11 @@
        <height>31</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Все группы</string>
+      </property>
+     </item>
     </widget>
     <widget class="QPushButton" name="sort_button">
      <property name="geometry">

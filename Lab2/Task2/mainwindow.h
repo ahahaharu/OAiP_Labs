@@ -28,6 +28,7 @@ private slots:
     void clearEditForm();
     void activateEditBtns();
     void deactivateEditBtns();
+    bool isGroupExist(QString);
 
     void on_AddButton_clicked();
 
@@ -41,10 +42,19 @@ private slots:
 
     void on_openFile_button_clicked();
 
+    void on_selectGroup_comboBox_currentIndexChanged(int index);
+
+    void on_sort_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Student* students = new Student[100];
+    Student* filtered = new Student[100];
+    QString* groups = new QString[50];
+    int groupsCount = 0;
     int curInd = 0;
+    int studentsCount = 0;
+    int filteredCount = 0;
 
 };
 #endif // MAINWINDOW_H

@@ -33,6 +33,10 @@ public:
     int getMl();
     int getHist();
 
+    bool operator==(const Student& other) const {
+        return name == other.name && speciality == other.speciality && group == other.group;
+    }
+
 };
 
 #endif // STUDENT_H
