@@ -716,7 +716,7 @@
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>251</width>
+       <width>281</width>
        <height>25</height>
       </rect>
      </property>
@@ -729,12 +729,12 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>171</width>
+       <width>281</width>
        <height>17</height>
       </rect>
      </property>
      <property name="text">
-      <string>Введите ФИО студента</string>
+      <string>Введите ФИО студента (или часть ФИО)</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit">
@@ -742,7 +742,7 @@
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>251</width>
+       <width>281</width>
        <height>25</height>
       </rect>
      </property>
@@ -750,9 +750,9 @@
     <widget class="QFrame" name="frame_4">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>300</x>
        <y>10</y>
-       <width>591</width>
+       <width>571</width>
        <height>141</height>
       </rect>
      </property>
@@ -785,7 +785,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>ОАиП - 10</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="maLabel">
@@ -798,7 +798,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Мат анализ - 10</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="agilaLabel">
@@ -811,7 +811,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>АГиЛА - 10</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="mlLabel">
@@ -824,7 +824,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Мат логика - 10</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="historyLabel">
@@ -837,7 +837,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>История - 10</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="Group_Label">
@@ -850,7 +850,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Номер группы: 353504</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="Spec_Label">
@@ -863,7 +863,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Специальность: ИиТП</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="Fio_Label">
@@ -876,10 +876,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>ФИО: Богданович Андрей Валерьевич</string>
+       <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="Group_Label_2">
+     <widget class="QLabel" name="AvMark_Label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -889,7 +889,20 @@
        </rect>
       </property>
       <property name="text">
-       <string>Средний балл - 10.0</string>
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>60</y>
+        <width>151</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Студент не найден</string>
       </property>
      </widget>
     </widget>

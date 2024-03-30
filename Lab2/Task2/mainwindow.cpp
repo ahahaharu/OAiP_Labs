@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     deactivateEditBtns();
+    ui->label_96->hide();
+    ui->label_13->hide();
 }
 
 MainWindow::~MainWindow()
@@ -627,5 +629,69 @@ void MainWindow::on_sort_button_clicked()
             ui->studentSelect_comboBox->addItem(QString::number(i+1)+") "+filtered[i].getInitials());
         }
     }
+}
+
+
+void MainWindow::on__createVed_button_clicked()
+{
+    ui->studentSelect_comboBox->setCurrentIndex(0);
+    ui->selectGroup_comboBox->setCurrentIndex(0);
+    delete[] students;
+    students = new Student[100];
+    delete[] groups;
+    groups = new QString[50];
+
+    int sz = ui->tableWidget->rowCount();
+    ui->tableWidget->setRowCount(0);
+
+    for (int i = 0; i < sz; i++) {
+        ui->studentSelect_comboBox->removeItem(1);
+    }
+
+    for (int i = 0; i < groupsCount; i++) {
+        ui->selectGroup_comboBox->removeItem(1);
+    }
+}
+
+
+void MainWindow::on_find_button_clicked()
+{
+    QString line = ui->lineEdit->text();
+    if (line.isEmpty()) {
+        QMessageBox::critical(nullptr, "Ошибка", "Введите ФИО, чтобы найти студента");
+        return;
+    }
+
+    ui->lineEdit->clear();
+
+    for (int i = 0; i < studentsCount; i++) {
+        if (students[i].getName().indexOf(line) != -1) {
+            ui->label_13->hide();
+            ui->Fio_Label->setText("ФИО: " + students[i].getName());
+            ui->Spec_Label->setText("Специальность: " + students[i].getSpec());
+            ui->Group_Label->setText("Номер группы: " + students[i].getGroup());
+            ui->AvMark_Label->setText("Средний балл: " + QString::number(students[i].averageMark()));
+            ui->label_96->show();
+            ui->oaipLabel->setText("ОАиП: " + QString::number(students[i].getOaip()));
+            ui->maLabel->setText("Мат анализ: " + QString::number(students[i].getMa()));
+            ui->agilaLabel->setText("АГиЛА: " + QString::number(students[i].getAgila()));
+            ui->mlLabel->setText("Мат логика: " + QString::number(students[i].getMl()));
+            ui->historyLabel->setText("История: " + QString::number(students[i].getHist()));
+            return;
+        }
+    }
+
+    ui->Fio_Label->setText("");
+    ui->Spec_Label->setText("");
+    ui->Group_Label->setText("");
+    ui->AvMark_Label->setText("");
+    ui->label_96->hide();
+    ui->oaipLabel->setText("");
+    ui->maLabel->setText("");
+    ui->agilaLabel->setText("");
+    ui->mlLabel->setText("");
+    ui->historyLabel->setText("");
+    ui->label_13->show();
+
 }
 

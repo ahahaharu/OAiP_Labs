@@ -46,6 +46,10 @@ private slots:
 
     void on_sort_button_clicked();
 
+    void on__createVed_button_clicked();
+
+    void on_find_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Student* students = new Student[100];
