@@ -72,7 +72,7 @@ bool Student::isSpecCorrect() {
 }
 
 bool Student::isGroupCorrect() {
-    if (speciality.isEmpty()) {
+    if (group.isEmpty()) {
         return false;
     }
 

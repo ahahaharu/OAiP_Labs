@@ -54,8 +54,6 @@ void MainWindow::activateEditBtns() {
 }
 
 void MainWindow::addError(QString errorMessage) {
-
-    clearForm();
     QMessageBox::critical(nullptr, "Ошибка", errorMessage);
 
 }
@@ -146,9 +144,8 @@ void MainWindow::on_AddButton_clicked()
             ui->selectGroup_comboBox->addItem(group);
         }
         studentsCount++;
+        clearForm();
     }
-
-    clearForm();
 }
 
 
@@ -191,6 +188,8 @@ void MainWindow::on_edit_button_clicked()
     bool isErr = false;
     bool isDelete = false;
 
+    Student st_backup = students[curInd];
+
     QString name = ui->fioEdit_line->text();
     QString spec = ui->specEdit_line->text();
     QString group = ui->groupEdit_line->text();
@@ -200,48 +199,50 @@ void MainWindow::on_edit_button_clicked()
     int ml_mark = ui->mlEdit_spinBOx->value();
     int hist_mark = ui->historyEdit_spinBox->value();
 
-    if (!isGroupExist(group)) {
-        groups[groupsCount] = group;
-        groupsCount++;
-        ui->selectGroup_comboBox->addItem(group);
-    }
-
-    if (ui->selectGroup_comboBox->currentIndex() == 0) {
-        students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
-    } else {
-        for (int i = 0; i < studentsCount; i++) {
-            if (students[i] == filtered[curInd]) {
-                students[i] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
-                break;
-            }
+    if (isGroupCorrect(group)) {
+        if (!isGroupExist(group)) {
+            groups[groupsCount] = group;
+            groupsCount++;
+            ui->selectGroup_comboBox->addItem(group);
         }
 
-        if (group == ui->selectGroup_comboBox->currentText()) {
-            filtered[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+        if (ui->selectGroup_comboBox->currentIndex() == 0) {
+            students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
         } else {
-            isDelete = true;
-
-
-
-            for (int i = curInd; i < filteredCount - 1; i++) {
-                filtered[i] = filtered[i + 1];
+            for (int i = 0; i < studentsCount; i++) {
+                if (students[i] == filtered[curInd]) {
+                    students[i] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+                    break;
+                }
             }
-            filteredCount--;
+            if (group == ui->selectGroup_comboBox->currentText()) {
+                filtered[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+            } else {
 
-            ui->studentSelect_comboBox->removeItem(curInd+1);
+                isDelete = true;
 
-            for (int i = 1; i < filteredCount+1; i++) {
-                ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+filtered[i-1].getInitials());
+                for (int i = curInd; i < filteredCount - 1; i++) {
+                    filtered[i] = filtered[i + 1];
+                }
+                filteredCount--;
+
+                ui->studentSelect_comboBox->removeItem(curInd+1);
+
+                for (int i = 1; i < filteredCount+1; i++) {
+                    ui->studentSelect_comboBox->setItemText(i, QString::number(i)+") "+filtered[i-1].getInitials());
+                }
+
+                if (filteredCount == 0) {
+                    int ind = ui->selectGroup_comboBox->currentIndex();
+                    ui->selectGroup_comboBox->setCurrentIndex(0);
+                    ui->selectGroup_comboBox->removeItem(ind);
+                    return;
+                }
             }
 
-            if (filteredCount == 0) {
-                int ind = ui->selectGroup_comboBox->currentIndex();
-                ui->selectGroup_comboBox->setCurrentIndex(0);
-                ui->selectGroup_comboBox->removeItem(ind);
-                return;
-            }
         }
-
+    } else {
+        students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
     }
 
     if (students[curInd].isNameCorrect()) {
@@ -286,13 +287,14 @@ void MainWindow::on_edit_button_clicked()
     }
 
     if (isErr) {
-        ui->tableWidget->removeRow(curInd);
+        students[curInd] = st_backup;
         addError(errorMessage);
+
     } else {
         ui->studentSelect_comboBox->setItemText(curInd+1, QString::number(curInd+1)+") "+students[curInd].getInitials());
+        ui->studentSelect_comboBox->setCurrentIndex(0);
     }
 
-    ui->studentSelect_comboBox->setCurrentIndex(0);
 }
 
 
@@ -693,5 +695,23 @@ void MainWindow::on_find_button_clicked()
     ui->historyLabel->setText("");
     ui->label_13->show();
 
+}
+
+bool MainWindow::isGroupCorrect(QString group) {
+    if (group.isEmpty()) {
+        return false;
+    }
+
+    if (group.length() != 6) {
+        return false;
+    }
+
+    for (int i = 0; i < group.length(); i++) {
+        if (!group[i].isNumber()) {
+            return false;
+        }
+    }
+
+    return true;
 }
 

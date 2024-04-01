@@ -29,6 +29,7 @@ private slots:
     void activateEditBtns();
     void deactivateEditBtns();
     bool isGroupExist(QString);
+    bool isGroupCorrect(QString);
 
     void on_AddButton_clicked();
 
