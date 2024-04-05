@@ -48,5 +48,6 @@ private:
     Ui::MainWindow *ui;
     Date* dates = new Date[100];
     int curDateInd = -1;
+    int datesCount = 0;
 };
 #endif // MAINWINDOW_H

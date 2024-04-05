@@ -192,6 +192,7 @@ void MainWindow::on_edit_button_clicked()
 
     QString name = ui->fioEdit_line->text();
     QString spec = ui->specEdit_line->text();
+    QString backupGroup = students[curInd].getGroup();
     QString group = ui->groupEdit_line->text();
     int oaip_mark = ui->oaipEdit_spinBox->value();
     int ma_mark = ui->maEdit_spinBox->value();
@@ -208,6 +209,31 @@ void MainWindow::on_edit_button_clicked()
 
         if (ui->selectGroup_comboBox->currentIndex() == 0) {
             students[curInd] = Student(name, spec, group, oaip_mark, ma_mark, agila_mark, ml_mark, hist_mark);
+            bool isStill = false;
+            for (int i = 0; i < studentsCount; i++) {
+                if (group == students[i].getGroup()) {
+                    if (i == curInd) {
+                        continue;
+                    }
+                    isStill = true;
+                    break;
+                }
+            }
+
+            int ind = 0;
+            if (!isStill) {
+                for (int i = 0; i < groupsCount; i++) {
+                    if (backupGroup == groups[i]) {
+                        ind = i;
+                        for (int j = i; j < groupsCount - 1; j++) {
+                            groups[i] = groups[i + 1];
+                        }
+                        groupsCount--;
+                        break;
+                    }
+                }
+                ui->selectGroup_comboBox->removeItem(ind+1);
+            }
         } else {
             for (int i = 0; i < studentsCount; i++) {
                 if (students[i] == filtered[curInd]) {

@@ -36,11 +36,36 @@ void MainWindow::activateBtns(){
 
 void MainWindow::on_addDat_button_clicked()
 {
-    QDate date = ui->dateEdit->date();
+    //QDate date = ui->dateEdit->date();
+    QString date = ui->lineEdit->text();
     int row = ui->tableWidget->rowCount();
     ui->tableWidget->insertRow(row);
 
-    dates[row] = Date(date.day(), date.month(), date.year());
+    int i = 0;
+
+    QString day = "", month = "", year = "";
+    if (isDateCorrect(date)) {
+        while (date[i] != '.') {
+            day += date[i];
+            i++;
+        }
+        i++;
+        while (date[i] != '.') {
+            month += date[i];
+            i++;
+        }
+        i++;
+        while (i < date.length()) {
+            year += date[i];
+            i++;
+        }
+        dates[row] = Date(day.toInt(), month.toInt(), year.toInt());
+    } else {
+        QMessageBox::critical(nullptr, "Ошибка", "Невпрный формат даты (Формат: dd/mm/yyyy)");
+        return;
+    }
+
+
 
     QTableWidgetItem *col1Item = new QTableWidgetItem(dates[row].getDate());
     ui->tableWidget->setItem(row,0,col1Item);
@@ -63,6 +88,8 @@ void MainWindow::on_addDat_button_clicked()
     }
     QTextStream out(&file);
     out << dates[row].getDate()<<'\n';
+
+    datesCount++;
 }
 
 
@@ -108,6 +135,7 @@ void MainWindow::on_openFileButton_clicked()
             ui->Date_ComboBox->addItem(QString::number(row+1) + ") " + dates[row].getDate());
 
             row++;
+            datesCount++;
         }
     }
 }
@@ -203,6 +231,18 @@ void MainWindow::on_changeDate_button_clicked()
         QTableWidgetItem *newDur = new QTableWidgetItem(QString::number(abs(dates[curDateInd].DateToDays() - dates[curDateInd-1].DateToDays())));
         ui->tableWidget->setItem(curDateInd-1, 2, newDur);
     }
+
+    QFile file("../dates.txt");
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        return;
+    }
+    QTextStream out(&file);
+    for(int i = 0; i < datesCount; i++) {
+        out << dates[i].getDate()<<'\n';
+    }
+
 }
 
 
