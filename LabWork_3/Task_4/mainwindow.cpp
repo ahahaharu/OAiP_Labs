@@ -28,12 +28,12 @@ void MainWindow::paintEvent(QPaintEvent*) {
 }
 
 
-void moveRect(Rect* rect, int x, int y) {
+void MainWindow::moveRect(Rect* rect, int x, int y) {
     int halfWidth = 20; // половина ширины столба
 
     // Поднимаем прямоугольник вверх
-    QPropertyAnimation *animation1 = new QPropertyAnimation(rect, "geometry");
-    animation1->setDuration(500); // продолжительность анимации в миллисекундах
+    animation1 = new QPropertyAnimation(rect, "geometry");
+    animation1->setDuration(500/speed); // продолжительность анимации в миллисекундах
     animation1->setStartValue(rect->geometry()); // начальное положение - текущее положение прямоугольника
     animation1->setEndValue(QRect(rect->x(), 40, rect->width(), rect->height())); // конечное положение - прямоугольник поднят вверх
     animation1->start(QAbstractAnimation::DeleteWhenStopped); // начинаем анимацию и удаляем ее, когда она закончится
@@ -43,8 +43,8 @@ void moveRect(Rect* rect, int x, int y) {
     loop.exec();
 
     // Перемещаем прямоугольник влево или вправо
-    QPropertyAnimation *animation2 = new QPropertyAnimation(rect, "geometry");
-    animation2->setDuration(500); // продолжительность анимации в миллисекундах
+    animation2 = new QPropertyAnimation(rect, "geometry");
+    animation2->setDuration(500/speed); // продолжительность анимации в миллисекундах
     animation2->setStartValue(QRect(rect->x(), 40, rect->width(), rect->height())); // начальное положение - прямоугольник находится наверху
     animation2->setEndValue(QRect(x - rect->width()/2 + halfWidth, 40, rect->width(), rect->height())); // конечное положение - прямоугольник перемещен влево или вправо
     animation2->start(QAbstractAnimation::DeleteWhenStopped); // начинаем анимацию и удаляем ее, когда она закончится
@@ -53,8 +53,8 @@ void moveRect(Rect* rect, int x, int y) {
     loop.exec();
 
     // Опускаем прямоугольник вниз
-    QPropertyAnimation *animation3 = new QPropertyAnimation(rect, "geometry");
-    animation3->setDuration(500); // продолжительность анимации в миллисекундах
+    animation3 = new QPropertyAnimation(rect, "geometry");
+    animation3->setDuration(500/speed); // продолжительность анимации в миллисекундах
     animation3->setStartValue(QRect(x - rect->width()/2 + halfWidth, 40, rect->width(), rect->height())); // начальное положение - прямоугольник находится вверху
     animation3->setEndValue(QRect(x - rect->width()/2 + halfWidth, y, rect->width(), rect->height())); // конечное положение - новое положение прямоугольника
     animation3->start(QAbstractAnimation::DeleteWhenStopped); // начинаем анимацию и удаляем ее, когда она закончится
@@ -65,6 +65,8 @@ void moveRect(Rect* rect, int x, int y) {
 
 void MainWindow::on_spinBox_valueChanged(int n)
 {
+    ui->pushButton->setEnabled(true);
+    ui->spinBox->setEnabled(true);
     // Удаляем старые диски
     for (int i = 0; i < towerSizes[0]; i++) {
         towers[0][i]->hide();
@@ -85,8 +87,13 @@ void MainWindow::on_spinBox_valueChanged(int n)
     }
 }
 
-void hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& sizeTo, int& sizeAux, int x1, int x2, int x3) {
+void MainWindow::hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& sizeTo, int& sizeAux, int x1, int x2, int x3) {
+
     if (n == 1) {
+        qDebug() << count;
+        count++;
+        ui->count->setText(QString::number(count));
+
         Rect* rect = from[sizeFrom-1];
         Rect** newFrom = new Rect*[sizeFrom - 1]; // выделяем память для нового массива
         for(int i = 0; i < sizeFrom - 1; i++) {
@@ -115,7 +122,68 @@ void hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& siz
 
 void MainWindow::on_pushButton_clicked()
 {
-    hanoi(towerSizes[0], towers[0], towers[2], towers[1], towerSizes[0], towerSizes[2], towerSizes[1], 310, 1570, 940);
+    if (ui->spinBox->value() != 0) {
+        count = 0;
+        ui->count->setText("0");
+        ui->pushButton->setEnabled(false);
+        ui->spinBox->setEnabled(false);
+        hanoi(towerSizes[0], towers[0], towers[2], towers[1], towerSizes[0], towerSizes[2], towerSizes[1], 310, 1570, 940);
+    } else {
+        QMessageBox::critical(0, "Ошибка", "Количество колец должно быть больше нуля, чтобы запустить анимацию");
+    }
 }
 
+
+
+void MainWindow::on_end_button_clicked()
+{
+    ui->count->setText("");
+    count = 0;
+
+    if (!animation1.isNull() && animation1->state() == QAbstractAnimation::Running) {
+        animation1->stop();
+        animation1->deleteLater();
+    }
+    if (!animation2.isNull() && animation2->state() == QAbstractAnimation::Running) {
+        animation2->stop();
+        animation2->deleteLater();
+    }
+    if (!animation3.isNull() && animation3->state() == QAbstractAnimation::Running) {
+        animation3->stop();
+        animation3->deleteLater();
+    }
+
+    QCoreApplication::processEvents(); // Обрабатываем все ожидающие события удаления
+
+    int n = ui->spinBox->value();
+
+    // Удаляем все прямоугольники на экране
+    QList<Rect*> rects = findChildren<Rect*>();
+    for (Rect* rect : rects) {
+        rect->hide();
+        rect->deleteLater();
+    }
+
+    QCoreApplication::processEvents(); // Обрабатываем все ожидающие события удаления
+
+    delete[] towers[0];
+    delete[] towers[1];
+    delete[] towers[2];
+    towers[0] = nullptr;
+    towers[1] = nullptr;
+    towers[2] = nullptr;
+    towerSizes[0] = 0;
+    towerSizes[1] = 0;
+    towerSizes[2] = 0;
+
+    ui->spinBox->setValue(n+1);
+    ui->spinBox->setValue(n);
+
+}
+
+
+void MainWindow::on_doubleSpinBox_valueChanged(double n)
+{
+    speed = n;
+}
 

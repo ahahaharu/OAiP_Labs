@@ -35,7 +35,7 @@
    <widget class="QSpinBox" name="spinBox">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>640</x>
       <y>820</y>
       <width>91</width>
       <height>61</height>
@@ -46,14 +46,17 @@
       <pointsize>24</pointsize>
      </font>
     </property>
+    <property name="maximum">
+     <number>22</number>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>890</y>
-      <width>541</width>
-      <height>81</height>
+      <x>820</x>
+      <y>820</y>
+      <width>351</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -63,6 +66,108 @@
     </property>
     <property name="text">
      <string>Запустить анимацию</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="end_button">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>900</y>
+      <width>351</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Завершить</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>910</y>
+      <width>601</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Количество перестановок:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="count">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>910</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>1750</x>
+      <y>830</y>
+      <width>151</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::UpDownArrows</enum>
+    </property>
+    <property name="minimum">
+     <double>0.250000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.250000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1270</x>
+      <y>830</y>
+      <width>451</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Скорость анимации</string>
     </property>
    </widget>
   </widget>
