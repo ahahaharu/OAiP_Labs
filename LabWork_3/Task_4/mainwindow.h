@@ -20,7 +20,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    std::vector<Rect*> towers[3];
+    Rect** towers[3];
+    int towerSizes[3] = {0, 0, 0};
 
 
 protected:

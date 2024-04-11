@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <stack>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,26 +25,6 @@ void MainWindow::paintEvent(QPaintEvent*) {
     painter.drawRect(940, 140, 40, 660);
     painter.drawRect(1570, 140, 40, 660);
 
-}
-
-void MainWindow::on_spinBox_valueChanged(int n)
-{
-    // Удаляем старые диски
-    for (Rect *rect : towers[0]) {
-        rect->hide();
-        rect->deleteLater();
-    }
-    towers[0].clear();
-
-    QCoreApplication::processEvents(); // Обрабатываем все ожидающие события удаления
-
-    // Создаем новые диски
-    for (int i = n-1; i >= 0; i--) {
-        Rect *rect = new Rect(i+1, this);
-        rect->setPosition(310 - (i+1)*5, 800 - (n-i)*30);
-        rect->show();
-        towers[0].push_back(rect);
-    }
 }
 
 
@@ -84,26 +63,59 @@ void moveRect(Rect* rect, int x, int y) {
     loop.exec();
 }
 
+void MainWindow::on_spinBox_valueChanged(int n)
+{
+    // Удаляем старые диски
+    for (int i = 0; i < towerSizes[0]; i++) {
+        towers[0][i]->hide();
+        towers[0][i]->deleteLater();
+    }
+    delete[] towers[0];
+    towers[0] = new Rect*[n];
+    towerSizes[0] = n;
 
+    QCoreApplication::processEvents(); // Обрабатываем все ожидающие события удаления
 
+    // Создаем новые диски
+    for (int i = 0; i < n; i++) {
+        Rect *rect = new Rect(n-i, this);
+        rect->setPosition(310 - (n-i)*5, 800 - (i+1)*30);
+        rect->show();
+        towers[0][i] = rect;
+    }
+}
 
-
-void hanoi(int n, std::vector<Rect*>& from, std::vector<Rect*>& to, std::vector<Rect*>& aux, int x1, int x2, int x3) {
+void hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& sizeTo, int& sizeAux, int x1, int x2, int x3) {
     if (n == 1) {
-        Rect* rect = from.back();
-        from.pop_back();
-        moveRect(rect, x2, 800 - (to.size()+1)*30); // перемещаем прямоугольник на новую позицию
-        to.push_back(rect);
+        Rect* rect = from[sizeFrom-1];
+        Rect** newFrom = new Rect*[sizeFrom - 1]; // выделяем память для нового массива
+        for(int i = 0; i < sizeFrom - 1; i++) {
+            newFrom[i] = from[i]; // копируем старые элементы
+        }
+        delete[] from; // удаляем старый массив
+        from = newFrom; // обновляем указатель
+        sizeFrom--;
+        moveRect(rect, x2, 800 - (sizeTo+1)*30); // перемещаем прямоугольник на новую позицию
+        Rect** newTo = new Rect*[sizeTo + 1]; // выделяем память для нового элемента
+        for(int i = 0; i < sizeTo; i++) {
+            newTo[i] = to[i]; // копируем старые элементы
+        }
+        delete[] to; // удаляем старый массив
+        newTo[sizeTo] = rect; // добавляем новый элемент
+        to = newTo; // обновляем указатель
+        sizeTo++;
         return;
     }
-    hanoi(n - 1, from, aux, to, x1, x3, x2);
-    hanoi(1, from, to, aux, x1, x2, x3);
-    hanoi(n - 1, aux, to, from, x3, x2, x1);
+    hanoi(n - 1, from, aux, to, sizeFrom, sizeAux, sizeTo, x1, x3, x2);
+    hanoi(1, from, to, aux, sizeFrom, sizeTo, sizeAux, x1, x2, x3);
+    hanoi(n - 1, aux, to, from, sizeAux, sizeTo, sizeFrom, x3, x2, x1);
 }
+
+
 
 void MainWindow::on_pushButton_clicked()
 {
-    // Вызываем функцию hanoi
-    hanoi(ui->spinBox->value(), towers[0], towers[2], towers[1], 310, 1570, 940);
+    hanoi(towerSizes[0], towers[0], towers[2], towers[1], towerSizes[0], towerSizes[2], towerSizes[1], 310, 1570, 940);
 }
+
 
