@@ -90,7 +90,6 @@ void MainWindow::on_spinBox_valueChanged(int n)
 void MainWindow::hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& sizeTo, int& sizeAux, int x1, int x2, int x3) {
 
     if (n == 1) {
-        qDebug() << count;
         count++;
         ui->count->setText(QString::number(count));
 
@@ -166,6 +165,8 @@ void MainWindow::on_end_button_clicked()
 
     QCoreApplication::processEvents(); // Обрабатываем все ожидающие события удаления
 
+
+
     delete[] towers[0];
     delete[] towers[1];
     delete[] towers[2];
@@ -175,6 +176,10 @@ void MainWindow::on_end_button_clicked()
     towerSizes[0] = 0;
     towerSizes[1] = 0;
     towerSizes[2] = 0;
+
+    double temp = ui->doubleSpinBox->value();
+    ui->doubleSpinBox->setValue(1);
+    ui->doubleSpinBox->setValue(temp);
 
     ui->spinBox->setValue(n+1);
     ui->spinBox->setValue(n);
