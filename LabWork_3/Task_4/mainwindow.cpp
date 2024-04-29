@@ -21,9 +21,9 @@ void MainWindow::paintEvent(QPaintEvent*) {
     painter.drawRect(20, 20, 1880, 780);
 
     painter.setBrush(brush);
-    painter.drawRect(310, 140, 40, 660);
-    painter.drawRect(940, 140, 40, 660);
-    painter.drawRect(1570, 140, 40, 660);
+    painter.drawRect(310, 140, 40, 660); // столб 1
+    painter.drawRect(940, 140, 40, 660); // столб 2
+    painter.drawRect(1570, 140, 40, 660); // столб 3
 
 }
 
@@ -106,7 +106,6 @@ void MainWindow::hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFr
         for(int i = 0; i < sizeTo; i++) {
             newTo[i] = to[i]; // копируем старые элементы
         }
-        delete[] to; // удаляем старый массив
         newTo[sizeTo] = rect; // добавляем новый элемент
         to = newTo; // обновляем указатель
         sizeTo++;
