@@ -38,7 +38,6 @@ protected:
 private slots:
     void on_spinBox_valueChanged(int arg1);
     void on_pushButton_clicked();
-
     void moveRect(Rect* rect, int x, int y);
     void hanoi(int n, Rect**& from, Rect**& to, Rect**& aux, int& sizeFrom, int& sizeTo, int& sizeAux, int x1, int x2, int x3);
     void on_end_button_clicked();
