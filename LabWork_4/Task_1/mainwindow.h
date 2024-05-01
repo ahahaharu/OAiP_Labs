@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QEventLoop>
+#include <QElapsedTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -36,13 +37,32 @@ private slots:
 
 private:
     void heapSort();
+    void heapSortTimer();
     void heapify(int n, int i);
-    void delay(int millisecondsToWait);
+    void heapifyTimer(int n, int i);
+
+
+    void quickSort(int low, int high);
+    void quickSortTimer(int low, int high);
+    int partition(int low, int high);
+    int partitionTimer(int low, int high);
+
+    void mergeSort(int left, int right);
+    void mergeSortTimer(int left, int right);
+    void merge(int left, int mid, int right);
+    void mergeTimer(int left, int mid, int right);
+
+    void interpolationSort();
+    void interpolationSortTimer();
 
     int* m_data = nullptr;
+    int* tempData = nullptr;
     int m_size = 100;
 
+    void delay(int millisecondsToWait);
+
     bool isSorting = false;
+    QElapsedTimer timer;
 
 private:
     Ui::MainWindow *ui;
