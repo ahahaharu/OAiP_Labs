@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    ui->arrayElements->setWordWrap(true);
 
     updateData(m_size);
 
@@ -31,7 +31,7 @@ void MainWindow::updateData(int newSize) {
         tempData[i] = m_data[i];
     }
 
-
+    printArray();
 }
 
 void MainWindow::paintEvent(QPaintEvent*) {
@@ -62,6 +62,7 @@ void MainWindow::heapSort()
         // вызываем процедуру heapify на уменьшенной куче
         heapify(i, 0);
         delay(50);  // Задержка в 50 миллисекунд
+        printArray();
         update();
     }
 }
@@ -168,11 +169,13 @@ int MainWindow::partition(int low, int high)
             i++; // увеличиваем индекс меньшего элемента
             std::swap(m_data[i], m_data[j]);
             delay(50);  // Задержка в 50 миллисекунд
+            printArray();
             update();
         }
     }
     std::swap(m_data[i + 1], m_data[high]);
     delay(50);  // Задержка в 50 миллисекунд
+    printArray();
     update();
     return (i + 1);
 }
@@ -256,6 +259,7 @@ void MainWindow::merge(int left, int mid, int right)
             j++;
         }
         delay(50);  // Задержка в 50 миллисекунд
+        printArray();
         update();
         k++;
     }
@@ -267,6 +271,7 @@ void MainWindow::merge(int left, int mid, int right)
         i++;
         k++;
         delay(50);  // Задержка в 50 миллисекунд
+        printArray();
         update();
     }
 
@@ -277,6 +282,7 @@ void MainWindow::merge(int left, int mid, int right)
         j++;
         k++;
         delay(50);  // Задержка в 50 миллисекунд
+        printArray();
         update();
     }
 }
@@ -372,6 +378,7 @@ void MainWindow::interpolationSort()
                     for (int j = 0; j < bucket[i].size() && isSorting; j++) {
                         m_data[start++] = bucket[i][j];
                         delay(50);  // Задержка в 50 миллисекунд
+                        printArray();
                         update();
                     }
                     divideSize.push_back(bucket[i].size());
@@ -440,8 +447,15 @@ void MainWindow::delay(int millisecondsToWait)
 
 void MainWindow::on_pushButton_clicked() // запустить сортировку
 {
+    if (isSorted()) {
+        QMessageBox::critical(0, "Массив отсортирован", "Массив уже отсортирован!\n");
+        return;
+    }
+
     int elapsedTime;
     isSorting = true;
+    ui->comboBox->setEnabled(false);
+    ui->pushButton_2->setEnabled(true);
 
     if (ui->comboBox->currentIndex() == 0) {
         timer.start();
@@ -462,21 +476,24 @@ void MainWindow::on_pushButton_clicked() // запустить сортиров�
         mergeSortTimer(0, m_size - 1);
         elapsedTime = timer.nsecsElapsed();
         ui->time->setText("Скорость: "+QString::number(elapsedTime / 1000000000.0, 'f', 9)+" секунды");
+
         mergeSort(0, m_size - 1);
     } else {
         timer.start();
         interpolationSortTimer();
         elapsedTime = timer.nsecsElapsed();
         ui->time->setText("Скорость: "+QString::number(elapsedTime / 1000000000.0, 'f', 9)+" секунды");
+
         interpolationSort();
     }
-
-
+    ui->comboBox->setEnabled(true);
+    ui->pushButton_2->setEnabled(false);
 }
 
 void MainWindow::on_pushButton_2_clicked() // остановить сортировку
 {
     isSorting = false;
+    ui->comboBox->setEnabled(true);
 }
 
 
@@ -486,5 +503,61 @@ void MainWindow::on_pushButton_3_clicked() // задать случайные з
     int size = ui->spinBox->value();
     updateData(size);
     update();
+}
+
+void MainWindow::printArray() {
+    QString arrayStr;
+    for (int i = 0; i < m_size; ++i) {
+        arrayStr += QString::number(m_data[i]);
+        if (i != m_size - 1) {
+            arrayStr += ", ";
+        }
+    }
+
+    ui->arrayElements->setText("Элементы массива: ["+arrayStr+"]");
+}
+
+
+int MainWindow::binsearch(int digit)
+{
+
+    int left = 0;
+    int right = m_size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        // Проверяем, является ли digit средним элементом
+        if (m_data[mid] == digit)
+            return mid;
+        // Если digit больше, игнорируем левую половину
+        if (m_data[mid] < digit)
+            left = mid + 1;
+        // Если digit меньше, игнорируем правую половину
+        else
+            right = mid - 1;
+    }
+
+    // Если мы здесь, то элемент не присутствует
+    return -1;
+}
+
+bool MainWindow::isSorted()
+{
+    for (int i = 0; i < m_size - 1; i++) {
+        if (m_data[i] > m_data[i + 1]) {
+            return false;  // Если предыдущий элемент больше следующего, массив не отсортирован
+        }
+    }
+    return true;  // Если мы прошли весь массив и не нашли ни одного элемента, который больше следующего, массив отсортирован
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    if (isSorted()) {
+        int el = ui->spinBox_2->value();
+        ui->index->setText("Индекс элемента: "+QString::number(binsearch(el)));
+    } else {
+        QMessageBox::critical(0, "Ошибка", "Массив не отсортирован!\nБинарный поиск проводиться только в отсортированном массиве!");
+    }
 }
 

@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QEventLoop>
 #include <QElapsedTimer>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,6 +36,8 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     void heapSort();
     void heapSortTimer();
@@ -54,6 +57,11 @@ private:
 
     void interpolationSort();
     void interpolationSortTimer();
+
+    bool isSorted();
+    int binsearch(int digit);
+
+    void printArray();
 
     int* m_data = nullptr;
     int* tempData = nullptr;
