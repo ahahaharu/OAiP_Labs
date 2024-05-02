@@ -38,6 +38,8 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_pushButton_5_clicked();
+
 private:
     void heapSort();
     void heapSortTimer();
@@ -61,6 +63,8 @@ private:
     bool isSorted();
     int binsearch(int digit);
 
+    int binpow(int digit, int powder, int mod);
+
     void printArray();
 
     int* m_data = nullptr;
@@ -71,6 +75,7 @@ private:
 
     bool isSorting = false;
     QElapsedTimer timer;
+    int index;
 
 private:
     Ui::MainWindow *ui;

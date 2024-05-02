@@ -588,9 +588,29 @@ void MainWindow::on_pushButton_4_clicked()
 {
     if (isSorted()) {
         int el = ui->spinBox_2->value();
-        ui->index->setText("Индекс элемента: "+QString::number(binsearch(el)));
+        index = binsearch(el);
+        ui->index->setText("Индекс элемента: "+QString::number(index));
     } else {
         QMessageBox::critical(0, "Ошибка", "Массив не отсортирован!\nБинарный поиск проводиться только в отсортированном массиве!");
     }
+}
+
+int MainWindow::binpow(int digit, int powder, int mod) {
+    digit %= mod;
+    int result = 1;
+    while (powder > 0) {
+        if (powder & 1)
+            result = (result * digit) % mod;
+        digit = (digit * digit) % mod;
+        powder >>= 1;
+    }
+    return result;
+}
+
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    int mod = ui->spinBox_3->value();
+    ui->bpow->setText("Полученное число: "+QString::number(binpow(index, m_size, mod)));
 }
 
