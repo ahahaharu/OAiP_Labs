@@ -131,72 +131,105 @@ void MainWindow::heapifyTimer(int n, int i)
 
 void MainWindow::quickSort(int low, int high)
 {
-    if (low < high && isSorting)
-    {
+
+    if (low >= high && isSorting)
+        return;
         /* pi - индекс опорного элемента */
-        int pi = partition(low, high);
+    int p = partition(low, high);
 
         // Рекурсивно сортируем элементы до и после опорного
-        quickSort(low, pi - 1);
-        quickSort(pi + 1, high);
-    }
+    quickSort(low, p - 1);
+    quickSort(p + 1, high);
+
 }
 
 void MainWindow::quickSortTimer(int low, int high)
 {
-    if (low < high && isSorting)
-    {
-        /* pi - индекс опорного элемента */
-        int pi = partitionTimer(low, high);
+    if (low >= high && isSorting)
+        return;
+    /* pi - индекс опорного элемента */
+    int p = partitionTimer(low, high);
 
-        // Рекурсивно сортируем элементы до и после опорного
-        quickSortTimer(low, pi - 1);
-        quickSortTimer(pi + 1, high);
-    }
+    // Рекурсивно сортируем элементы до и после опорного
+    quickSortTimer(low, p - 1);
+    quickSortTimer(p + 1, high);
 }
 
-int MainWindow::partition(int low, int high)
+int MainWindow::partition(int start, int end)
 {
     // Опорный элемент (принимаем за опорный последний элемент)
-    int pivot = m_data[high];
-    int i = (low - 1); // Индекс меньшего элемента
+    int pivot = m_data[start];
+    //int i = (low - 1); // Индекс меньшего элемента
+    int count = 0;
 
-    for (int j = low; j <= high - 1 && isSorting; j++)
-    {
-        // Если текущий элемент меньше или равен опорному
-        if (m_data[j] <= pivot)
-        {
-            i++; // увеличиваем индекс меньшего элемента
-            std::swap(m_data[i], m_data[j]);
-            delay(50);  // Задержка в 50 миллисекунд
+    for (int i = start + 1; i <= end && isSorting; i++) {
+        if (m_data[i] <= pivot) {
+            count++;
+        }
+    }
+
+    int pivotIndex = start + count;
+    std::swap(m_data[pivotIndex], m_data[start]);
+    delay(50);
+    printArray();
+    update();
+
+    int i = start, j = end;
+
+    while (i < pivotIndex && j > pivotIndex && isSorting) {
+
+        while (m_data[i] <= pivot) {
+            i++;
+        }
+
+        while (m_data[j] > pivot) {
+            j--;
+        }
+
+        if (i < pivotIndex && j > pivotIndex && isSorting) {
+            std::swap(m_data[i++], m_data[j--]);
+            delay(50);
             printArray();
             update();
         }
     }
-    std::swap(m_data[i + 1], m_data[high]);
-    delay(50);  // Задержка в 50 миллисекунд
-    printArray();
-    update();
-    return (i + 1);
+
+    return pivotIndex;
 }
 
-int MainWindow::partitionTimer(int low, int high)
+int MainWindow::partitionTimer(int start, int end)
 {
-    // Опорный элемент (принимаем за опорный последний элемент)
-    int pivot = tempData[high];
-    int i = (low - 1); // Индекс меньшего элемента
+    int pivot = tempData[start];
+    //int i = (low - 1); // Индекс меньшего элемента
+    int count = 0;
 
-    for (int j = low; j <= high - 1 && isSorting; j++)
-    {
-        // Если текущий элемент меньше или равен опорному
-        if (tempData[j] <= pivot)
-        {
-            i++; // увеличиваем индекс меньшего элемента
-            std::swap(tempData[i], tempData[j]);
+    for (int i = start + 1; i <= end && isSorting; i++) {
+        if (tempData[i] <= pivot) {
+            count++;
         }
     }
-    std::swap(tempData[i + 1], tempData[high]);
-    return (i + 1);
+
+    int pivotIndex = start + count;
+    std::swap(tempData[pivotIndex], tempData[start]);
+
+    int i = start, j = end;
+
+    while (i < pivotIndex && j > pivotIndex && isSorting) {
+
+        while (tempData[i] <= pivot) {
+            i++;
+        }
+
+        while (tempData[j] > pivot) {
+            j--;
+        }
+
+        if (i < pivotIndex && j > pivotIndex && isSorting) {
+            std::swap(tempData[i++], tempData[j--]);
+        }
+    }
+
+    return pivotIndex;
 }
 
 void MainWindow::mergeSort(int left, int right)
