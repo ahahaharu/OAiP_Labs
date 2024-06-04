@@ -53,6 +53,7 @@ void MainWindow::printB() {
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    b.clear();
     std::vector<int> troiki;
     int count = 0;
 
