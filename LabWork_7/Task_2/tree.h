@@ -3,7 +3,6 @@
 
 #include "node.h"
 #include "node.cpp"
-#include <utility>
 #include <QDebug>
 #include <QTreeWidgetItem>
 #include <QLabel>

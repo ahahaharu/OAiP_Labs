@@ -1,10 +1,9 @@
 #include "hashtable.h"
-#include <cstddef>
 
 template<typename T>
 int HashTable<T>::hashFunction(int key) const
 {
-    return ((key % size) * (key % size)) % size;
+    return key % size;
 }
 
 template<typename T>

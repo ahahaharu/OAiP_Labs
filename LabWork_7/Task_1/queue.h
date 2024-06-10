@@ -4,7 +4,6 @@
 #include "node.h"
 #include "node.cpp"
 #include <QListWidget>
-#include <cstddef>
 
 template <typename T>
 class Queue
